@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon</title>
+    <style>
+        /* Basic reset for margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #E3E6E6;
+}
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #131921;
+    padding: 10px 20px;
+}
+
+/* Left section (Logo and Categories) */
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    object-fit: contain;
+    color: #ddd;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.dropbtn {
+    background-color: #131921;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dropbtn:hover {
+    background-color: #f0c14b;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Center section (Search Bar) */
+.navbar-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-input {
+    width: 50%;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+}
+
+.search-btn {
+    padding: 8px 20px;
+    background-color: #f0c14b;
+    border: none;
+    cursor: pointer;
+    color: #111;
+    font-size: 16px;
+}
+
+.search-btn:hover {
+    background-color: #e2a800;
+}
+
+/* Right section (Account and Cart) */
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 20px;
+}
+
+.nav-link:hover {
+    background-color: #f0c14b;
+    border-radius: 5px;
+}
+
+/* Cart icon */
+.cart-icon {
+    width: 20px;
+    margin-right: 5px;
+}
+
+
+.second-navbar {
+    background-color: #232f3e;  /* Slightly lighter color than main navbar */
+    padding: 10px 0;
+}
+
+.second-navbar .second-nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;  /* Centers the items in the navbar */
+}
+
+.second-nav-links li {
+    margin: 0 15px;
+}
+
+.second-nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.second-nav-links li a:hover {
+    color: #ff9900;  /* Highlight color on hover */
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <!-- Logo Section -->
+                <a href="/" class="logo">
+                    <h1>Amazon.in</h1>
+                     
+                </a>
+                <!-- Categories Dropdown -->
+                <div class="dropdown">
+                    <button class="dropbtn">All</button>
+                    <div class="dropdown-content">
+                        <a href="#">Electronics</a>
+                        <a href="#">Fashion</a>
+                        <a href="#">Home</a>
+                        <a href="#">Beauty</a>
+                        <a href="#">Books</a>
+                        <a href="#">Toys</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-center">
+                <!-- Search Bar -->
+                <input type="text" class="search-input" placeholder="Search for products, brands, and more">
+                <button class="search-btn">Search</button>
+            </div>
+
+            <div class="navbar-right">
+                <!-- Account and Cart Links -->
+                <a href="#" class="nav-link">Hello, Sign in</a>
+                <a href="#" class="nav-link">Returns & Orders</a>
+                <a href="#" class="nav-link">
+                    <img src="{% static 'images/cart-icon.svg' %}" alt="" class="cart-icon">
+                    Cart
+                </a>
+            </div>
+        </nav>
+        <nav class="second-navbar">
+            <ul class="second-nav-links">
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Books</a></li>
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Prime</a></li>
+                <li><a href="#">Deals</a></li>
+                <li><a href="#">Toys & Games</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        
+    </div>
+
+</body>
+</html>
