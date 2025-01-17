@@ -7,178 +7,285 @@
     <title>Amazon</title>
     <style>
         /* Basic reset for margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #E3E6E6;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            .navbar-left {
+                flex-direction: column;
+                align-items: center;
+            }
+            .navbar-center {
+                flex-direction: column;
+                align-items: center;
+            }
+            .navbar-right {
+                flex-direction: column;
+                align-items: center;
+            }
+            .second-navbar {
+                display: none;
+            }
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #131921;
+            padding: 10px 20px;
+        }
+
+        /* Left section (Logo and Categories) */
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px; /* Increased height for a bigger logo */
+            width: 80px;  /* Increased width for a bigger logo */
+            object-fit: contain;
+            margin-right: 20px;
+            text-decoration: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .dropbtn {
+            background-color: #131921;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .dropbtn:hover {
+            background-color: #f0c14b;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Center section (Search Bar) */
+        .navbar-center {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-input {
+            width: 50%;
+            padding: 8px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .search-btn {
+            padding: 8px 20px;
+            background-color: #f0c14b;
+            border: none;
+            cursor: pointer;
+            color: #111;
+            font-size: 16px;
+        }
+
+        .search-btn:hover {
+            background-color: #e2a800;
+        }
+
+        /* Right section (Account and Cart) */
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-left: 20px;
+        }
+
+        .nav-link:hover {
+            background-color: #f0c14b;
+            border-radius: 5px;
+        }
+
+        /* Cart icon */
+        .cart-icon {
+            width: 20px;
+            margin-right: 5px;
+        }
+
+        .second-navbar {
+            background-color: #232f3e;  /* Slightly lighter color than main navbar */
+            padding: 10px 0;
+        }
+
+        .second-navbar .second-nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;  /* Centers the items in the navbar */
+            margin: 0;
+            padding: 0;
+        }
+
+        .second-nav-links li {
+            margin: 0 15px;
+        }
+
+        .second-nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .second-nav-links li a:hover {
+            color: #ff9900;  /* Highlight color on hover */
+        }
+
+
+        /* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
-    background-color: #E3E6E6;
+
+/* Body and general layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Product Listing Section */
+.product-listing {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.product-listing h2 {
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #232f3e;
+}
+
+.products {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.product {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.product img:hover {
+    transform: scale(1.1);
+}
+
+.product h3 {
+    margin: 20px 0;
+    font-size: 1.2em;
+    color: #232f3e;
+}
+
+.product .price {
+    font-size: 1.4em;
+    color: #b12704;
+    margin-bottom: 20px;
+}
+
+.buy-btn {
+    padding: 10px 20px;
+    background-color: #febd69;
+    color: #232f3e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.buy-btn:hover {
+    background-color: #f1a500;
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-    }
-    .navbar-left {
+    .products {
         flex-direction: column;
         align-items: center;
     }
-    .navbar-center {
-        flex-direction: column;
-        align-items: center;
-    }
-    .navbar-right {
-        flex-direction: column;
-        align-items: center;
-    }
-    .second-navbar {
-        display: none;
+
+    .product {
+        width: 80%;
+        margin-bottom: 20px;
     }
 }
 
-/* Navbar styles */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #131921;
-    padding: 10px 20px;
-}
-
-/* Left section (Logo and Categories) */
-.navbar-left {
-    display: flex;
-    align-items: center;
-}
-
-.logo {
-    width: 100px;
-    object-fit: contain;
-    color: #ddd;
-    margin-right: 20px;
-    text-decoration: none;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    margin-left: 20px;
-}
-
-.dropbtn {
-    background-color: #131921;
-    color: white;
-    padding: 8px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.dropbtn:hover {
-    background-color: #f0c14b;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    min-width: 160px;
-    z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/* Center section (Search Bar) */
-.navbar-center {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.search-input {
-    width: 50%;
-    padding: 8px;
-    font-size: 16px;
-    border: none;
-}
-
-.search-btn {
-    padding: 8px 20px;
-    background-color: #f0c14b;
-    border: none;
-    cursor: pointer;
-    color: #111;
-    font-size: 16px;
-}
-
-.search-btn:hover {
-    background-color: #e2a800;
-}
-
-/* Right section (Account and Cart) */
-.navbar-right {
-    display: flex;
-    align-items: center;
-}
-
-.nav-link {
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 14px;
-    margin-left: 20px;
-}
-
-.nav-link:hover {
-    background-color: #f0c14b;
-    border-radius: 5px;
-}
-
-/* Cart icon */
-.cart-icon {
-    width: 20px;
-    margin-right: 5px;
-}
-
-
-.second-navbar {
-    background-color: #232f3e;  /* Slightly lighter color than main navbar */
-    padding: 10px 0;
-}
-
-.second-navbar .second-nav-links {
-    list-style: none;
-    display: flex;
-    justify-content: center;  /* Centers the items in the navbar */
-}
-
-.second-nav-links li {
-    margin: 0 15px;
-}
-
-.second-nav-links li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.second-nav-links li a:hover {
-    color: #ff9900;  /* Highlight color on hover */
-}
     </style>
 </head>
 <body>
@@ -186,22 +293,20 @@ body{
     <header>
         <nav class="navbar">
             <div class="navbar-left">
-                <!-- Logo Section -->
-                
-                <a href="/" class="logo">
-                    <h1>Amazon.in</h1>
-                     
-                </a>
+                <div id="nav-logo"><img src="{% static '/images/logo.jpeg' %}" alt="Amazon Logo" class="logo"></div>
                 <!-- Categories Dropdown -->
                 <div class="dropdown">
                     <button class="dropbtn">All</button>
                     <div class="dropdown-content">
-                        <a href="#">Electronics</a>
-                        <a href="#">Fashion</a>
-                        <a href="#">Home</a>
-                        <a href="#">Beauty</a>
-                        <a href="#">Books</a>
-                        <a href="#">Toys</a>
+
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Fashion</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Beauty</a></li>
+                        <li><a href="#">Books</a></li>
+                        <li><a href="#">Toys</a></li>
+        
+                       
                     </div>
                 </div>
             </div>
@@ -217,25 +322,57 @@ body{
                 <a href="#" class="nav-link">Hello, Sign in</a>
                 <a href="#" class="nav-link">Returns & Orders</a>
                 <a href="#" class="nav-link">
-                    <img src="{% static 'images/cart-icon.svg' %}" alt="" class="cart-icon">
+                    <img src="{% static 'images/cart.png' %}" alt="" class="cart-icon">
                     Cart
                 </a>
             </div>
         </nav>
         <nav class="second-navbar">
             <ul class="second-nav-links">
-                <li><a href="#">Electronics</a></li>
-                <li><a href="#">Books</a></li>
-                <li><a href="#">Fashion</a></li>
-                <li><a href="#">Prime</a></li>
-                <li><a href="#">Deals</a></li>
-                <li><a href="#">Toys & Games</a></li>
+             
+
+                       <li><a href="#">Dumbells</a></li> 
+                       <li> <a href="#">Protien powder</a></li> 
+                       <li> <a href="#">Creatine</a></li>   
+                       <li><a href="#">omega-3</a></li>
+                       <li><a href="#">Vitamins</a></li>
+                       <li><a href="#">BCAA</a></li>
+                       <li><a href="#">Pre-workout</a></li>
+                       <li><a href="#">Protien Bars</a></li>
+                     
             </ul>
         </nav>
     </header>
-    <div class="container">
-        
+    <!-- Product Listings -->
+<section class="product-listing">
+    <h2>Featured Products</h2>
+    <div class="products">
+        <div class="product">
+            <img src="{static '/images/Dumbbell.webp' %}" alt="Product 1">
+            <h3>Dumbbell</h3>
+            <p class="price">RS.2000</p>
+            <button class="buy-btn">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="{% static '/images/powder.jpg' %}" alt="Product 2">
+            <h3>Protien powder</h3>
+            <p class="price">RS.3000</p>
+            <button class="buy-btn">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/150" alt="Product 3">
+            <h3>Product 3</h3>
+            <p class="price">$15.00</p>
+            <button class="buy-btn">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/150" alt="Product 4">
+            <h3>Product 4</h3>
+            <p class="price">$50.00</p>
+            <button class="buy-btn">Add to Cart</button>
+        </div>
     </div>
+</section>
 
 </body>
 </html>

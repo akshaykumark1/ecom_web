@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon - Returns and Orders</title>
+    <style>
+        /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and font */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header styling */
+header {
+    background-color: #131921;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img {
+    width: 100px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Returns and Orders Section */
+.return-orders {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.return-orders h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.search-box input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-box button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #FF9900;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search-box button:hover {
+    background-color: #e68900;
+}
+
+.order-list {
+    margin-top: 20px;
+}
+
+.order-item {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.order-item .product-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.order-item .order-info {
+    flex: 1;
+}
+
+.order-item button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.order-item button:hover {
+    background-color: #ddd;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #131921;
+    color: white;
+}
+
+footer p {
+    margin: 0;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static '/images/logo.jpeg' %}" alt="Amazon Logo" />
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Returns & Orders</a></li>
+                <li><a href="#">Cart</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="return-orders">
+        <h1>Returns & Orders</h1>
+        <div class="search-box">
+            <input type="text" placeholder="Track your orders or returns" />
+            <button>Search</button>
+        </div>
+        
+        <div class="order-list">
+            <h2>Your Orders</h2>
+            <div class="order-item">
+                <img src="product-image.jpg" alt="Product Image" class="product-img">
+                <div class="order-info">
+                    <p><strong>Order #12345</strong></p>
+                    <p>Item: Example Product</p>
+                    <p>Status: Shipped</p>
+                    <button>Return or Replace Items</button>
+                </div>
+            </div>
+            
+            <div class="order-item">
+                <img src="product-image.jpg" alt="Product Image" class="product-img">
+                <div class="order-info">
+                    <p><strong>Order #67890</strong></p>
+                    <p>Item: Another Product</p>
+                    <p>Status: Delivered</p>
+                    <button>Return or Replace Items</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Amazon</p>
+    </footer>
+</body>
+</html>
