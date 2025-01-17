@@ -15,6 +15,28 @@
 body{
     background-color: #E3E6E6;
 }
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+    .navbar-left {
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar-center {
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar-right {
+        flex-direction: column;
+        align-items: center;
+    }
+    .second-navbar {
+        display: none;
+    }
+}
+
 /* Navbar styles */
 .navbar {
     display: flex;
@@ -165,6 +187,7 @@ body{
         <nav class="navbar">
             <div class="navbar-left">
                 <!-- Logo Section -->
+                
                 <a href="/" class="logo">
                     <h1>Amazon.in</h1>
                      
@@ -216,3 +239,4 @@ body{
 
 </body>
 </html>
+

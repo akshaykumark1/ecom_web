@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon-like Cart</title>
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table-header {
+    display: flex;
+    background-color: #f8f8f8;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.table-column {
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.cart-item .table-column {
+    padding-left: 20px;
+}
+
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.remove-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.remove-btn:hover {
+    background-color: #c0392b;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 2px solid #ddd;
+    flex-wrap: wrap;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.checkout-btn {
+    background-color: #ff9900;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.checkout-btn:hover {
+    background-color: #e68900;
+}
+
+@media (max-width: 768px) {
+    .cart-container {
+        padding: 10px;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-item img {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .cart-item .table-column {
+        padding-left: 0;
+    }
+
+    .remove-btn {
+        margin-top: 10px;
+    }
+
+    .cart-summary {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .total {
+        margin-bottom: 20px;
+    }
+
+    .checkout-btn {
+        margin-top: 20px;
+    }
+}
+
+  </style>
+</head>
+<body>
+
+    <div class="cart-container">
+        <h1>Your Shopping Cart</h1>
+
+        <div class="cart-table">
+            <div class="cart-table-header">
+                <div class="table-column">Item</div>
+                <div class="table-column">Price</div>
+                <div class="table-column">Quantity</div>
+                <div class="table-column">Total</div>
+                <div class="table-column">Actions</div>
+            </div>
+
+            <!-- Cart Item 1 -->
+            <div class="cart-item">
+                <div class="table-column">
+                    <img class="s-image" src="https://m.media-amazon.com/images/I/61bhnrJkGML._AC_UL320_.jpg" srcset="https://m.media-amazon.com/images/I/61bhnrJkGML._AC_UL320_.jpg 1x, https://m.media-amazon.com/images/I/61bhnrJkGML._AC_UL480_FMwebp_QL65_.jpg 1.5x, https://m.media-amazon.com/images/I/61bhnrJkGML._AC_UL640_FMwebp_QL65_.jpg 2x, https://m.media-amazon.com/images/I/61bhnrJkGML._AC_UL800_FMwebp_QL65_.jpg 2.5x, https://m.media-amazon.com/images/I/61bhnrJkGML._AC_UL960_FMwebp_QL65_.jpg 3x" alt="Optimum Nutrition (ON) Gold Standard 100% Whey Protein Powder 5 lbs, 2.27 kg (Double Rich Chocolate), for Muscle Support &amp;..." aria-hidden="true" data-image-index="13" data-image-load="" data-image-latency="s-product-image" data-image-source-density="1">                   <div>Protein powder</div>
+                </div>
+                <div class="table-column">RS.2000</div>
+                <div class="table-column">
+                    <input type="number" value="1" min="1">
+                </div>
+                <div class="table-column">RS.2000</div>
+                <div class="table-column">
+                    <button class="remove-btn">Remove</button>
+                </div>
+            </div>
+
+            <!-- Cart Item 2 -->
+            <div class="cart-item">
+                <div class="table-column">
+                    <img class="s-image" src="https://m.media-amazon.com/images/I/61MjFs7OifL._AC_UL320_.jpg" srcset="https://m.media-amazon.com/images/I/61MjFs7OifL._AC_UL320_.jpg 1x, https://m.media-amazon.com/images/I/61MjFs7OifL._AC_UL480_FMwebp_QL65_.jpg 1.5x, https://m.media-amazon.com/images/I/61MjFs7OifL._AC_UL640_FMwebp_QL65_.jpg 2x, https://m.media-amazon.com/images/I/61MjFs7OifL._AC_UL800_FMwebp_QL65_.jpg 2.5x, https://m.media-amazon.com/images/I/61MjFs7OifL._AC_UL960_FMwebp_QL65_.jpg 3x" alt="Sponsored Ad - Optimum Nutrition (ON) Micronized Creatine Powder - 250 Gram, 83 Serves, 3g of 100% Creatine Monohydrate pe..." aria-hidden="true" data-image-index="2" data-image-load="" data-image-latency="s-product-image" data-image-source-density="1">
+                    <div>Product 2</div>
+                </div>
+                <div class="table-column">RS.350</div>
+                <div class="table-column">
+                    <input type="number" value="1" min="1">
+                </div>
+                <div class="table-column">RS.350</div>
+                <div class="table-column">
+                    <button class="remove-btn">Remove</button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+         <!-- Cart Item 3 -->
+         <div class="cart-item">
+            <div class="table-column">
+                <img class="s-image" src="https://m.media-amazon.com/images/I/61x-F+FteLL._AC_UL320_.jpg" srcset="https://m.media-amazon.com/images/I/61x-F+FteLL._AC_UL320_.jpg 1x, https://m.media-amazon.com/images/I/61x-F+FteLL._AC_UL480_FMwebp_QL65_.jpg 1.5x, https://m.media-amazon.com/images/I/61x-F+FteLL._AC_UL640_FMwebp_QL65_.jpg 2x, https://m.media-amazon.com/images/I/61x-F+FteLL._AC_UL800_FMwebp_QL65_.jpg 2.5x, https://m.media-amazon.com/images/I/61x-F+FteLL._AC_UL960_FMwebp_QL65_.jpg 3x" alt="Sponsored Ad - KAKSS Steel Dumbbell With Stand (Proudly Made In India) (24kg(3kg+4kg+5kg Pair))" aria-hidden="true" data-image-index="24" data-image-load="" data-image-latency="s-product-image" data-image-source-density="1">
+                <div>Product 2</div>
+            </div>
+            <div class="table-column">RS.4000</div>
+            <div class="table-column">
+                <input type="number" value="1" min="1">
+            </div>
+            <div class="table-column">RS.4000</div>
+
