@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amazon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
     <style>
         /* Basic reset for margin and padding */
         * {
@@ -203,13 +206,15 @@ body {
 .product-listing {
     padding: 40px 20px;
     text-align: center;
-    background-color: #fff;
+    background-color: #f1fdd1;
+    /* background-image: url("{% static 'images/amazon-g.jpg' %}"); */
 }
 
 .product-listing h2 {
     margin-bottom: 30px;
     font-size: 2em;
     color: #232f3e;
+    /* background-image: linear-gradient(to right, #232f3e, #f1a500); */
 }
 
 .products {
@@ -286,6 +291,97 @@ body {
     }
 }
 
+
+/* General Footer Styling */
+footer {
+  background-color: #232f3e; /* Dark blue background for Amazon-like theme */
+  color: #fff; /* White text */
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  text-align: left;
+}
+
+/* Footer Container to hold columns */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Footer Columns Styling */
+.footer-column {
+  width: 22%;
+  margin-bottom: 20px;
+}
+
+.footer-column h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #ff9900; /* Amazon orange color for hover effect */
+}
+
+/* Social Media Icons Styling */
+.footer-column ul li a.icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+/* Bottom Section Styling */
+.footer-bottom {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #444;
+  font-size: 14px;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #ccc;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-column {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer-column h3 {
+    font-size: 16px;
+  }
+
+  .footer-column ul li {
+    font-size: 13px;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -299,12 +395,12 @@ body {
                     <button class="dropbtn">All</button>
                     <div class="dropdown-content">
 
-                        <li><a href="#">Electronics</a></li>
-                        <li><a href="#">Fashion</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Beauty</a></li>
-                        <li><a href="#">Books</a></li>
-                        <li><a href="#">Toys</a></li>
+                        <a href="#">Electronics</a>
+                        <a href="#">Fashion</a>
+                        <a href="#">Home</a>
+                        <a href="#">Beauty</a>
+                        <a href="#">Books</a>
+                        <a href="#">Toys</a>
         
                        
                     </div>
@@ -348,7 +444,7 @@ body {
     <h2>Featured Products</h2>
     <div class="products">
         <div class="product">
-            <img src="{static '/images/Dumbbell.webp' %}" alt="Product 1">
+            <img src="{% static '/images/Dumbbell.webp' %}" alt="Product 1">
             <h3>Dumbbell</h3>
             <p class="price">RS.2000</p>
             <button class="buy-btn">Add to Cart</button>
@@ -374,6 +470,53 @@ body {
     </div>
 </section>
 
+
+
+<footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>About Us</h3>
+        <ul>
+          <li><a href="#">About Amazon</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press Releases</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Customer Service</h3>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Help</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="#">Electronics</a></li>
+          <li><a href="#">Fashion</a></li>
+          <li><a href="#">Home</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-column">
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="#" class="icon"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+          <li><a href="#" class="icon"><i class="fa fa-instagram"></i> Instagram</a></li>
+          <li><a href="#" class="icon"><i class="fa fa-twitter"></i> Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p>&copy; 2025 Amazon, Inc. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  
 </body>
 </html>
 
