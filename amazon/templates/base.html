@@ -17,7 +17,7 @@
         }
 
         body {
-            background-color: #E3E6E6;
+            background-color: #000000;
         }
 
         @media (max-width: 768px) {
@@ -389,7 +389,7 @@ footer {
     <header>
         <nav class="navbar">
             <div class="navbar-left">
-                <div id="nav-logo"><img src="{% static '/images/logo.jpeg' %}" alt="Amazon Logo" class="logo"></div>
+                <div id="nav-logo"><img src="{% static '/images/logo.jpeg' %}" style="color: #E3E6E6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" alt="Amazon" class="logo"></div>
                 <!-- Categories Dropdown -->
                 <div class="dropdown">
                     <button class="dropbtn">All</button>
@@ -415,9 +415,9 @@ footer {
 
             <div class="navbar-right">
                 <!-- Account and Cart Links -->
-                <a href="#" class="nav-link">Hello, Sign in</a>
-                <a href="#" class="nav-link">Returns & Orders</a>
-                <a href="#" class="nav-link">
+                <a href="{% url 'signin' %}" class="nav-link">Hello, Sign in</a>
+                <a href="{% url 'orders' %}" class="nav-link">Returns & Orders</a>
+                <a href="{% url 'cart' %}" class="nav-link">
                     <img src="{% static 'images/cart.png' %}" alt="" class="cart-icon">
                     Cart
                 </a>
@@ -427,7 +427,7 @@ footer {
             <ul class="second-nav-links">
              
 
-                       <li><a href="#">Dumbells</a></li> 
+                       <li><a href="#">Trenbolin</a></li> 
                        <li> <a href="#">Protien powder</a></li> 
                        <li> <a href="#">Creatine</a></li>   
                        <li><a href="#">omega-3</a></li>
@@ -449,24 +449,8 @@ footer {
             <p class="price">RS.2000</p>
             <button class="buy-btn">Add to Cart</button>
         </div>
-        <div class="product">
-            <img src="{% static '/images/powder.jpg' %}" alt="Product 2">
-            <h3>Protien powder</h3>
-            <p class="price">RS.3000</p>
-            <button class="buy-btn">Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="https://via.placeholder.com/150" alt="Product 3">
-            <h3>Product 3</h3>
-            <p class="price">$15.00</p>
-            <button class="buy-btn">Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="https://via.placeholder.com/150" alt="Product 4">
-            <h3>Product 4</h3>
-            <p class="price">$50.00</p>
-            <button class="buy-btn">Add to Cart</button>
-        </div>
+      
+    </var>
     </div>
 </section>
 
