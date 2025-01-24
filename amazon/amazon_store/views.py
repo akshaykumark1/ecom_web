@@ -21,36 +21,38 @@ def cart(request):
     return render(request, 'cart.html')    
 
 def orders(request):
-    return render(request, 'orders.html')    
+    return render(request, 'orders.html')  
 def help(request):
     return render(request, 'help.html') 
 
 
 def seller(request):
+    return render(request, 'seller/seller.html')    
 
-    return render(request, 'seller.html')    
 def sellerin(request):
     if request.user.is_authenticated:
         return redirect('seller')
-    
+    username=None
+    password=None 
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         
         if not username or not password:
             messages.error(request, 'Please fill in all fields.')
-            return render(request, 'sellerin.html')
+            return render(request, 'seller/sellerin.html')
         
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
             login(request, user)
             request.session['username'] = user.username
+            request.session['user_id'] = user.id
             return redirect('seller')
         else:
             messages.error(request, 'Invalid username or password.')
     
-    return render(request, 'sellerin.html')
+    return render(request, 'seller/sellerin.html')
 
 
 def registration(request):
@@ -68,7 +70,6 @@ def registration(request):
         else:
             user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
-            return redirect('signin')
-
-    return render(request, 'registration.html')
+            return redirect('sellerin')
+    return render(request, 'seller/registration.html')
 
