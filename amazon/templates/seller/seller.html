@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Page</title>
+    <style>
+        /* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #333;
+    padding: 20px 0;
+}
+
+header .logo {
+    width: 150px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+header nav ul li {
+    margin: 0 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li .add-btn {
+    background-color: #28a745; /* Green color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+header nav ul li .add-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.logout-btn {
+    background-color: #dc3545; /* Red color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.logout-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+.profile {
+    background-color: #fff;
+    padding: 40px 0;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-img {
+    width: 150px;
+    border-radius: 50%;
+}
+
+.profile-info {
+    width: 60%;
+}
+
+.profile-info h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.profile-info p {
+    margin-bottom: 10px;
+}
+
+.profile-info ul {
+    list-style: none;
+}
+
+.products {
+    padding: 40px 0;
+    background-color: #fff;
+}
+
+.products h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.product-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.product {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.product h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.product .price {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.product .description {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.product button {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.product button:hover {
+    background-color: #555;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.footer p a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer p a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="logo.png" alt="Seller Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <!-- Add Button -->
+                    <li><button class="add-btn">Add Product</button></li>
+                    <!-- Logout Button -->
+                    <li><button class="logout-btn">Logout</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="profile">
+        <div class="container">
+            <img src="seller.png" alt="Seller Profile Picture" class="profile-img">
+            <div class="profile-info">
+                <h1>Seller Name</h1>
+                <p>Welcome to my shop! I specialize in handmade goods crafted with care and attention to detail. Browse my collection below!</p>
+                <ul>
+                    <li>Email: contact@seller.com</li>
+                    <li>Location: City, Country</li>
+                    <li>Social Media: <a href="#">Instagram</a>, <a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="product-list">
+                <div class="product">
+                    <img src="product1.jpg" alt="Product 1">
+                    <h3>Product Name</h3>
+                    <p class="price">$19.99</p>
+                    <p class="description">This is a short description of the product. It's handmade and perfect for any occasion.</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product">
+                    <img src="product2.jpg" alt="Product 2">
+                    <h3>Product Name</h3>
+                    <p class="price">$29.99</p>
+                    <p class="description">This is a short description of the product. It's handmade and perfect for any occasion.</p>
+                    <button>Add to Cart</button>
+                </div>
+                <!-- Add more products as needed -->
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="container">
+            <p>&copy; 2025 Seller Name | All Rights Reserved</p>
+            <p>Terms & Conditions | Privacy Policy</p>
+        </div>
+    </section>
+</body>
+</html>
+
