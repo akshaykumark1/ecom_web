@@ -61,7 +61,8 @@
         }
         .product {
             background-color: #fff;
-            width: 30%;
+            width: 100%;
+            max-width: 300px;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -86,6 +87,15 @@
             color: #2ecc71;
             margin-top: 10px;
         }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .product {
+                width: 100%;
+                max-width: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -98,11 +108,12 @@
         <div class="add-product-form">
             <h3>Add New Product</h3>
             <form>
+                {% csrf_token %}
                 <input type="text" placeholder="Product Name" required>
                 <input type="text" placeholder="Product Description" required>
                 <input type="number" placeholder="Price" required>
-                <input type="url" placeholder="Product Image URL" required>
-                <button type="submit">Add Product</button>
+                <input type="" placeholder="Product Image URL" required>
+               <a href="{% url 'home' %}"> <button type="submit">Add Product</button></a>
             </form>
         </div>
 
@@ -131,3 +142,4 @@
 
 </body>
 </html>
+

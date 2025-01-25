@@ -7,191 +7,199 @@
     <title>Seller Page</title>
     <style>
         /* Reset some default browser styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-}
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-header {
-    background-color: #333;
-    padding: 20px 0;
-}
+        header {
+            background-color: #333;
+            padding: 20px 0;
+        }
 
-header .logo {
-    width: 150px;
-}
+        header .logo {
+            width: 150px;
+        }
 
-header nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: flex-end;
-}
+        header nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-header nav ul li {
-    margin: 0 20px;
-}
+        header nav ul li {
+            margin: 0 10px;
+        }
 
-header nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-header nav ul li .add-btn {
-    background-color: #28a745; /* Green color */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 4px;
-}
+        header nav ul li .add-btn,
+        header nav ul li .logout-btn {
+            background-color: #28a745; /* Green color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
 
-header nav ul li .add-btn:hover {
-    background-color: #218838; /* Darker green on hover */
-}
+        header nav ul li .logout-btn {
+            background-color: #dc3545; /* Red color */
+        }
 
-.logout-btn {
-    background-color: #dc3545; /* Red color */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 4px;
-}
+        header nav ul li .add-btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
 
-.logout-btn:hover {
-    background-color: #c82333; /* Darker red on hover */
-}
+        header nav ul li .logout-btn:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
 
-.profile {
-    background-color: #fff;
-    padding: 40px 0;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .profile, .products, .footer {
+            padding: 40px 0;
+            background-color: #fff;
+        }
 
-.profile-img {
-    width: 150px;
-    border-radius: 50%;
-}
+        .profile-img {
+            width: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
 
-.profile-info {
-    width: 60%;
-}
+        .profile-info h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
 
-.profile-info h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
+        .profile-info p {
+            margin-bottom: 10px;
+        }
 
-.profile-info p {
-    margin-bottom: 10px;
-}
+        .profile-info ul {
+            list-style: none;
+        }
 
-.profile-info ul {
-    list-style: none;
-}
+        .products h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
 
-.products {
-    padding: 40px 0;
-    background-color: #fff;
-}
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
 
-.products h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-}
+        .product {
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            padding: 20px;
+            flex: 0 1 30%;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
 
-.product-list {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
+        .product img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
 
-.product {
-    background-color: #fafafa;
-    border: 1px solid #ddd;
-    padding: 20px;
-    width: 30%;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .product h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
 
-.product img {
-    width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-    margin-bottom: 20px;
-}
+        .product .price {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
 
-.product h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
+        .product .description {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
 
-.product .price {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 10px;
-}
+        .product button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-.product .description {
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-    color: #555;
-}
+        .product button:hover {
+            background-color: #555;
+        }
 
-.product button {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-}
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
 
-.product button:hover {
-    background-color: #555;
-}
+        .footer p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
 
-.footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
+        .footer p a {
+            color: white;
+            text-decoration: none;
+        }
 
-.footer p {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
+        .footer p a:hover {
+            text-decoration: underline;
+        }
 
-.footer p a {
-    color: white;
-    text-decoration: none;
-}
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-.footer p a:hover {
-    text-decoration: underline;
-}
+            .profile-info {
+                width: 100%;
+            }
 
+            .product-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -203,10 +211,8 @@ header nav ul li .add-btn:hover {
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="#">Shop</a></li>
                     <li><a href="#">Contact</a></li>
-                    <!-- Add Button -->
-                    <li><button class="add-btn">Add Product</button></li>
-                    <!-- Logout Button -->
-                    <li><button class="logout-btn">Logout</button></li>
+                   <a href="{% url 'add_product' %}"><li><button class="add-btn">Add Product</button></li></a>
+                    <a href="{% url 'logout' %}"><li><button class="logout-btn">Logout</button></li></a>
                 </ul>
             </nav>
         </div>

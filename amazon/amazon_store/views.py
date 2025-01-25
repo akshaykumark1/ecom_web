@@ -2,8 +2,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -25,7 +25,7 @@ def orders(request):
 def help(request):
     return render(request, 'help.html') 
 
-
+@login_required(login_url='sellerin')
 def seller(request):
     return render(request, 'seller/seller.html')    
 
@@ -69,7 +69,25 @@ def registration(request):
             messages.error(request, 'Username already exists.')
         else:
             user = User.objects.create_user(username=username, email=email, password=password)
+            user.is_seller = True
             user.save()
-            return redirect('sellerin')
+            messages.success(request, 'Account created successfully.')
+
+            return render('seller/sellerin.html')
     return render(request, 'seller/registration.html')
+
+
+def logout(request):
+    request.session.flush()
+    return render(request, 'seller/sellerin.html')  # A custom template after logout
+
+
+@login_required(login_url='sellerin')
+def Add_product(request):
+    return render(request, 'seller/selleradd.html')
+
+
+def selleradd(request):
+    return render(request, 'seller/selleradd.html')
+
 
