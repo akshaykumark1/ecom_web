@@ -107,37 +107,33 @@
     <div class="container">
         <div class="add-product-form">
             <h3>Add New Product</h3>
-            <form>
+            <form action="{% url 'selleradd' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="text" placeholder="Product Name" required>
-                <input type="text" placeholder="Product Description" required>
-                <input type="number" placeholder="Price" required>
-                <input type="" placeholder="Product Image URL" required>
-               <a href="{% url 'home' %}"> <button type="submit">Add Product</button></a>
+                <input type="text" name="title" placeholder="Product Name" required>
+                <input type="text" name="description" placeholder="Product Description" required>
+                <input type="number" name="price" placeholder="Price" required>
+                <input type="file" name="image" placeholder="Product Image" required>
+                <input type="text" name="category" placeholder="Category" required>
+                <button type="submit">Add Product</button>
             </form>
+            
         </div>
 
         <h2>Products on Homepage</h2>
         <div class="product-list">
+            {% for product in products %}
             <div class="product">
-                <img src="https://via.placeholder.com/300x200" alt="Product Image">
-                <h3>Product Name</h3>
-                <p>Description of the product.</p>
-                <p class="price">$19.99</p>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/300x200" alt="Product Image">
-                <h3>Another Product</h3>
-                <p>Description of another product.</p>
-                <p class="price">$29.99</p>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/300x200" alt="Product Image">
-                <h3>Special Item</h3>
-                <p>Description of special item.</p>
-                <p class="price">$49.99</p>
-            </div>
-        </div>
+                <img src="{{ product.image.url }}" alt="{{ product.title }}">
+                <h3>{{ product.title }}</h3>
+                <p>Description: {{ product.description }}</p>
+                <p>Category: {{ product.category }}</p>
+                <p class="price">Price: ${{ product.price }} </p>
+                <a href="{% url 'delete' product.id %}"> <button class="btn btn-danger">
+                  <i class="bi bi-trash"></i> Delete
+              </button></a>
+        </div> 
+        {% endfor %}             
+    </div>
     </div>
 
 </body>

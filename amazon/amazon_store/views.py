@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from .models import *
 
 def home(request):
     return render(request, 'base.html')
@@ -73,7 +73,7 @@ def registration(request):
             user.save()
             messages.success(request, 'Account created successfully.')
 
-            return render('seller/sellerin.html')
+            return render(request,'seller/sellerin.html')
     return render(request, 'seller/registration.html')
 
 
@@ -88,6 +88,75 @@ def Add_product(request):
 
 
 def selleradd(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        price = request.POST.get('price')
+        category = request.POST.get('category')
+        image = request.FILES.get('image')
+        description = request.POST.get('description')
+
+        # Check if all required fields are provided
+        if not title or not price or not category or not image or not description:
+            messages.error(request, "All fields are required!")
+            return render(request, 'seller/selleradd.html')
+
+        # Create and save product object
+        product = Product(
+            title=title,
+            price=price,
+            category=category,
+            image=image,
+            description=description
+        )
+        product.save()
+
+        # Success message
+        messages.success(request, "Product added successfully!")
+        return redirect('sellerview')
+    
+    # If GET request, render the page with empty form
     return render(request, 'seller/selleradd.html')
 
+
+def sellerview(request):
+    products = Product.objects.all()
+    return render(request, 'seller/seller.html', {'products': products})
+def edit_product(request, id):
+    product = Product.objects.get(id=id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        price = request.POST.get('price')
+        category = request.POST.get('category')
+        image = request.FILES.get('image')
+        description = request.POST.get('description')
+
+
+        # Check if all required fields are provided
+        if not title or not price or not category or not description:
+            messages.error(request, "All fields are required!")
+            return render(request, 'seller/edit.html', {'product': product})
+
+        # Update and save product object
+        product.title = title
+        product.price = price
+        product.category = category
+        if image:
+            product.image = image
+        product.description = description
+        product.save()
+
+        # Success message
+        messages.success(request, "Product updated successfully!")
+        return redirect('sellerview')
+    
+    # If GET request, render the page with empty form
+    return render(request, 'seller/edit.html', {'product': product})
+
+def delete_product(request, id):
+    product = Product.objects.get(id=id)
+    if request.method == 'POST':
+        product.delete()
+        messages.success(request, "Product deleted successfully!")
+        return redirect('sellerview')
+    return render(request, 'seller/delete_product.html', {'product': product})
 
