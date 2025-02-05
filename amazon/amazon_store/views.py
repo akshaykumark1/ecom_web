@@ -1,5 +1,5 @@
 # myapp/views.py
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -120,7 +120,11 @@ def selleradd(request):
 
 def sellerview(request):
     products = Product.objects.all()
-    return render(request, 'seller/seller.html', {'products': products})
+    
+    return redirect(request, 'seller/seller.html', {'products': products})
+
+
+
 def edit_product(request, id):
     product = Product.objects.get(id=id)
     if request.method == 'POST':
@@ -152,11 +156,8 @@ def edit_product(request, id):
     # If GET request, render the page with empty form
     return render(request, 'seller/edit.html', {'product': product})
 
-def delete_product(request, id):
-    product = Product.objects.get(id=id)
-    if request.method == 'POST':
-        product.delete()
-        messages.success(request, "Product deleted successfully!")
-        return redirect('sellerview')
-    return render(request, 'seller/delete_product.html', {'product': product})
-
+def delete_view(request, id):
+    product = get_object_or_404(Product, pk=id)  # Get product by ID (or 404 if not found)
+    product.delete()  # Delete the product
+    messages.success(request, "Product deleted successfully!")  # Optional success message
+    return redirect('seller')

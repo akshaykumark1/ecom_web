@@ -119,20 +119,7 @@
             
         </div>
 
-        <h2>Products on Homepage</h2>
-        <div class="product-list">
-            {% for product in products %}
-            <div class="product">
-                <img src="{{ product.image.url }}" alt="{{ product.title }}">
-                <h3>{{ product.title }}</h3>
-                <p>Description: {{ product.description }}</p>
-                <p>Category: {{ product.category }}</p>
-                <p class="price">Price: ${{ product.price }} </p>
-                <a href="{% url 'delete' product.id %}"> <button class="btn btn-danger">
-                  <i class="bi bi-trash"></i> Delete
-              </button></a>
-        </div> 
-        {% endfor %}             
+              
     </div>
     </div>
 

@@ -122,12 +122,10 @@ USE_TZ = True
 # settings.py
 
 # Static file settings
-STATIC_URL = '/static/'
-
-# In case you're using custom static file directories
-STATICFILES_DIRS = [
-    BASE_DIR / 'myapp/static',  # Add your app's static directory here
-]
+STATIC_URL = 'static/'
+STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # If you want to store collected static files in a specific directory for production use:
 STATIC_ROOT = BASE_DIR / 'staticfiles'

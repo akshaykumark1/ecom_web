@@ -258,8 +258,8 @@
                     <h3>{{ product.title }}</h3>
                     <p class="price">${{ product.price|floatformat:2 }}</p>
                     <p class="description">{{ product.description }}</p>
-                    <button class="edit-btn"><a href="{% url 'edit_product' id=product.id %}">Edit Product</a></button>
-                    <button class="delete-btn"><a href="{% url 'delete_product' id=product.id %}">Delete</a></button>
+                    <button class="edit-btn"><a href="{% url 'edit_product' product.id %}">Edit Product</a></button>
+                    <button class="delete-btn"><a href="{% url 'delete_view' product.id %}">Delete</a></button>
                 </div>
                 {% endfor %}
             </div>
@@ -274,4 +274,6 @@
     </section>
 </body>
 </html>
+
+
 
