@@ -121,7 +121,7 @@ def selleradd(request):
 def sellerview(request):
     products = Product.objects.all()
     
-    return redirect(request, 'seller/seller.html', {'products': products})
+    return render(request, 'seller/seller.html', {'products': products})
 
 
 
@@ -151,13 +151,14 @@ def edit_product(request, id):
 
         # Success message
         messages.success(request, "Product updated successfully!")
-        return redirect('sellerview')
+        return render(request, 'seller/seller.html')
     
     # If GET request, render the page with empty form
     return render(request, 'seller/edit.html', {'product': product})
 
 def delete_view(request, id):
-    product = get_object_or_404(Product, pk=id)  # Get product by ID (or 404 if not found)
-    product.delete()  # Delete the product
-    messages.success(request, "Product deleted successfully!")  # Optional success message
-    return redirect('seller')
+    product = Product.objects.filter(pk=id).first()  # Get product by ID (or None if not found)
+    if product:
+        product.delete()  # Delete the product
+        messages.success(request, "Product deleted successfully!")  # Optional success message
+    return redirect('sellerview')
