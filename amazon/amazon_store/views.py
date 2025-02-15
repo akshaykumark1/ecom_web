@@ -77,6 +77,37 @@ def orders(request):
 def help(request):
     return render(request, 'help.html') 
 
+
+
+def protien(request):
+    products = Product.objects.all()
+
+    return render(request, 'protien.html', {'products': products})
+
+def creatine(request):
+    products = Product.objects.all()
+
+    return render(request, 'creatine.html', {'products': products})
+
+
+def  preworkout(request):
+    products = Product.objects.all()
+
+    return render(request, 'prework.html', {'products': products})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @login_required(login_url='sellerin')
 def seller(request):
     return render(request, 'seller/seller.html')    

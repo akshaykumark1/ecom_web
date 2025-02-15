@@ -391,7 +391,7 @@ footer {
     <header>
         <nav class="navbar">
             <div class="navbar-left">
-                <div id="nav-logo"><img src="#" style="color: #E3E6E6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" alt="FLEX FORGE" class="logo"></div>
+                <div id="nav-logo"> <a style="text-decoration: none; color: #ffffff;" href="{% url 'home' %}"><h3>FLEX FORGE</h3></div>
                 <!-- Categories Dropdown -->
                 <div class="dropdown">
                     <button class="dropbtn">COUNTRY</button>
@@ -424,17 +424,12 @@ footer {
             </div>
         </nav>
         <nav class="second-navbar">
-            <ul class="second-nav-links">
+            <ul class="second-nav-links" style="font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 500;">
              
 
-                       <li><a href="#">Trenbolin</a></li> 
-                       <li> <a href="#">Protien powder</a></li> 
-                       <li> <a href="#">Creatine</a></li>   
-                       <li><a href="#">omega-3</a></li>
-                       <li><a href="#">Vitamins</a></li>
-                       <li><a href="#">BCAA</a></li>
-                       <li><a href="#">Pre-workout</a></li>
-                       <li><a href="#">Protien Bars</a></li>
+                       <li> <a href="{% url 'protien' %}">Protien powder</a></li> 
+                       <li> <a href="{% url 'creatine' %}">Creatine</a></li>   
+                       <li><a href="{% url 'preworkout' %}">Pre-workout</a></li>
                      
             </ul>
         </nav>
@@ -442,7 +437,7 @@ footer {
     <!-- Product Listings -->
 
 
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="{% static 'images/coro1.jpg' %}" class="d-block w-100" style="height: 1050px; object-fit: cover;" alt="1">
@@ -537,4 +532,5 @@ footer {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>  
 </body>
 </html>
+
 

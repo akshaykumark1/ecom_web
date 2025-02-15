@@ -27,6 +27,18 @@ urlpatterns = [
     path('delete_view/<int:id>/', views.delete_view, name='delete_view'),   
     
 
+
+
+
+
+
+
+
+    path('protien',views.protien,name='protien'),   
+    path('creatine',views.creatine,name='creatine'),
+    path('preworkout',views.preworkout,name='preworkout'),
+
+
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

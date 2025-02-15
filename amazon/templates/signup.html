@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +11,16 @@
         box-sizing: border-box;
     }
     body{
+        background-image: url("{% static 'images/background/b3.jpg' %}");
+        
+        background-size: cover;
+        background-repeat: no-repeat;
         display: flex;
         height: 100vh;
-        background-color: #343a40;
+        /* background-color: #343a40; */
     }
     #container{
+        opacity: 0.6;
         margin:auto;
         display: flex;
         color:#f8f9fa;
