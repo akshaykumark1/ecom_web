@@ -12,10 +12,62 @@ def home(request):
     
     
 def signin(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    username=None
+    password=None 
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        if not username or not password:
+            messages.error(request, 'Please fill in all fields.')
+            return render(request, 'signin.html')
+        
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            request.session['username'] = user.username
+            request.session['user_id'] = user.id
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid username or password.')
     return render(request, 'signin.html')
 
 def signup(request):
-    return render(request, 'signup.html')    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm-password')
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match.')
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already exists.')
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists.')
+        else:
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.is_seller = True
+            user.save()
+            messages.success(request, 'Account created successfully.')
+
+            return render(request,'signin.html')
+    return render(request, 'signup.html')
+
+
+
+
+
+def userlogout(request):
+    logout(request)
+    return redirect('signin')  # A custom template after logout
+
+
+
+
+
 
 def cart(request):
     return render(request, 'cart.html')    
@@ -77,7 +129,7 @@ def registration(request):
     return render(request, 'seller/registration.html')
 
 
-def logout(request):
+def slogout(request):
     request.session.flush()
     return render(request, 'seller/sellerin.html')  # A custom template after logout
 

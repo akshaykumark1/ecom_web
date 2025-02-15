@@ -5,12 +5,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('signin',views.signin,name='signin'),
+    path('home', views.home, name='home'),
+    path('',views.signin,name='signin'),
     path('signup',views.signup,name='signup'),
     path('cart',views.cart,name='cart'),
     path('orders',views.orders,name='orders'),
     path('help',views.help,name='help'),
+    path('log-out',views.userlogout,name='userlogout'),
 
 
 
@@ -18,7 +19,7 @@ urlpatterns = [
     path('sellerhome',views.seller,name='seller'),
     path('seller',views.sellerin,name='sellerin'),
     path('registration',views.registration,name='registration'),
-    path('logout',views.logout, name='logout'),
+    path('logout',views.slogout, name='logout'),
     path('add_product',views.Add_product,name='add_product'),
     path('selleradd',views.selleradd,name='selleradd'),
     path('sellerview',views.sellerview,name='sellerview'),

@@ -161,7 +161,7 @@
         }
 
         .second-navbar {
-            background-color: #232f3e;  /* Slightly lighter color than main navbar */
+            background-color: #000000;  /* Slightly lighter color than main navbar */
             padding: 10px 0;
         }
 
@@ -397,10 +397,10 @@ footer {
                     <button class="dropbtn">COUNTRY</button>
                     <div class="dropdown-content">
 
-                        <a href="#">UAE</a>
-                        <a href="#">USA</a>
-                        <a href="#">CANADA</a>
-                        <a href="#">INDIA</a>
+                        <a href="#"><img src="{% static 'images/uae.webp' %}" alt="UAE" style="height: 20px; width: 20px;">UAE</a>
+                        <a href="#"><img src="{% static 'images/usa.png' %}" alt="UAE" style="height: 20px; width: 20px;">USA</a>
+                        <a href="#"><img src="{% static 'images/uk.jpg' %}" alt="UAE" style="height: 20px; width: 20px;">UK</a>
+                        <a href="#"><img src="{% static 'images/india.png' %}" alt="UAE" style="height: 20px; width: 20px;">INDIA</a>
         
                        
                     </div>
@@ -415,7 +415,7 @@ footer {
 
             <div class="navbar-right">
                 <!-- Account and Cart Links -->
-                <a href="{% url 'signin' %}" class="nav-link">Hello, Sign in</a>
+                <a href="{% url 'userlogout' %}" class="nav-link">LOG OUT</a>
                 <a href="{% url 'orders' %}" class="nav-link">Returns & Orders</a>
                 <a href="{% url 'cart' %}" class="nav-link">
                     <img src="{% static 'images/cart.png' %}" alt="" class="cart-icon">
@@ -469,6 +469,23 @@ footer {
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
