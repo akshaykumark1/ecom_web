@@ -294,6 +294,11 @@ body {
 }
 
 
+
+.container-fluid {
+    background-color: #000000;
+}
+
 /* General Footer Styling */
 footer {
   background-color: #000000; /* Dark blue background for Amazon-like theme */
@@ -363,6 +368,7 @@ footer {
   color: #ccc;
 }
 
+
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
   .footer-container {
@@ -410,13 +416,13 @@ footer {
             <div class="navbar-center">
                 <!-- Search Bar -->
                 <input type="text" class="search-input" placeholder="Search for products, brands, and more" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; outline: none;">
-                <button class="search-btn" style="background-color: #333; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Search</button>
+                <button class="search-btn" style="background-color: #000000; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Search</button>
             </div>
 
             <div class="navbar-right">
                 <!-- Account and Cart Links -->
-                <a href="{% url 'signin' %}" class="nav-link">Account</a>
-                <a href="{% url 'userlogout' %}" class="nav-link">LOG OUT</a>
+                <a href="{% url 'signin' %}" class="nav-link"><i class="fa-solid fa-user" style="color: #ffffff;"></i></a>
+                <a href="{% url 'userlogout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a>
 
                 <a href="{% url 'orders' %}" class="nav-link">Returns & Orders</a>
                 <a href="{% url 'cart' %}" class="nav-link">
@@ -436,25 +442,150 @@ footer {
             </ul>
         </nav>
     </header>
+
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #000000;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-left > * {
+            margin-right: 10px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #000000;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .search-input {
+            flex-grow: 1;
+        }
+
+        .search-btn {
+            padding: 10px 20px;
+            border: none;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-right > * {
+            margin-left: 10px;
+        }
+
+        .second-navbar {
+            background-color: #000000;
+            padding: 10px 0;
+        }
+
+        .second-nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .second-nav-links > * {
+            margin: 0 15px;
+        }
+
+        .second-nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar-left {
+                margin-bottom: 10px;
+            }
+
+            .navbar-center {
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                margin-bottom: 10px;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .search-btn {
+                width: 100%;
+            }
+
+            .second-navbar {
+                display: none;
+            }
+        }
+    </style>
     <!-- Product Listings -->
 
 
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{% static 'images/coro1.jpg' %}" class="d-block w-100" style="height: 1050px; object-fit: cover;" alt="1">
+            <img src="{% static 'images/coro1.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="1">
         </div>
         <div class="carousel-item">
-            <img src="{% static 'images/coro2.jpg' %}" class="d-block w-100" style="height: 1050px; object-fit: cover;" alt="2">
+            <img src="{% static 'images/coro2.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="2">
         </div>
         <div class="carousel-item">
-            <img src="{% static 'images/coro3.jpg' %}" class="d-block w-100" style="height: 1050px; object-fit: cover;" alt="3">
+            <img src="{% static 'images/coro3.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="3">
         </div>
         <div class="carousel-item">
-            <img src="{% static 'images/coro4.jpg' %}" class="d-block w-100" style="height: 1050px; object-fit: cover;" alt="4">
+            <img src="{% static 'images/coro4.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="4">
         </div>
         <div class="carousel-item">
-            <img src="{% static 'images/coro5.jpg' %}" class="d-block w-100" style="height: 1050px; object-fit: cover;" alt="5">
+            <img src="{% static 'images/coro5.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="5">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -468,69 +599,69 @@ footer {
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<footer>
-    <div class="footer-container">
-      <div class="footer-column">
-        <h3>About Us</h3>
-        <ul>
-          <li><a href="#">About FLEX FORGE</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Press Releases</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-column">
-        <h3>Customer Service</h3>
-        <ul>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Help</a></li>
-          <li><a href="#">Returns & Refunds</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-column">
-        <h3>Shop</h3>
-        <ul>
-          <li><a href="#">Protien powder</a></li>
-          <li><a href="#">Creatine</a></li>
-          <li><a href="#">Home</a></li>
-        </ul>
-      </div>
-  
-      <div class="footer-column">
-        <h3>Follow Us</h3>
-        <ul style="font-size: 2rem;">
-          <li><a href="#"><i class="fa-brands fa-facebook"></i> </a></li>
-          <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-          <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-        </ul>
-      </div>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        {% for i in product %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card">
+                <img src="{{i.image.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{i.title}}</h5>
+                    <p class="card-text">{{i.description}}</p>
+                    <p class="card-text">Price: {{i.price}}</p>
+                    <p class="card-text">Category: {{i.category}}</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                    <button class="btn btn-success">Buy Now</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-  
-    <div class="footer-bottom">
-      <p>&copy; 2025 FLEX FORGE, Inc. All Rights Reserved.</p>
+</div>
+
+
+
+<footer class="footer mt-auto py-3" style="background-color: #000000; color: #ffffff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <h3 style="color: #ffffff;">About Us</h3>
+                <ul class="list-unstyled">
+                    <li><a href="#" style="color: #ffffff;">About FLEX FORGE</a></li>
+                    <li><a href="#" style="color: #ffffff;">Careers</a></li>
+                    <li><a href="#" style="color: #ffffff;">Press Releases</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h3 style="color: #ffffff;">Customer Service</h3>
+                <ul class="list-unstyled">
+                    <li><a href="#" style="color: #ffffff;">Contact Us</a></li>
+                    <li><a href="#" style="color: #ffffff;">Help</a></li>
+                    <li><a href="#" style="color: #ffffff;">Returns & Refunds</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h3 style="color: #ffffff;">Shop</h3>
+                <ul class="list-unstyled">
+                    <li><a href="#" style="color: #ffffff;">Protien powder</a></li>
+                    <li><a href="#" style="color: #ffffff;">Creatine</a></li>
+                    <li><a href="#" style="color: #ffffff;">Home</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h3 style="color: #ffffff;">Follow Us</h3>
+                <ul class="list-unstyled" style="font-size: 2rem;">
+                    <li><a href="#"><i class="fa-brands fa-facebook" style="color: #ffffff;"></i> </a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="text-center">&copy; 2025 FLEX FORGE, Inc. All Rights Reserved.</p>
+        </div>
     </div>
-  </footer>
-  
+</footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>  
 </body>
 </html>

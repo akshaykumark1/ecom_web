@@ -7,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 
 def home(request):
-    return render(request, 'base.html')
+    product=Product.objects.all()
+
+    return render(request, 'base.html',{'product':product})
     
     
     
@@ -70,30 +72,30 @@ def userlogout(request):
 
 
 def cart(request):
-    return render(request, 'cart.html')    
+    return render(request, 'user/cart.html')    
 
 def orders(request):
-    return render(request, 'orders.html')  
+    return render(request, 'user/orders.html')  
 def help(request):
-    return render(request, 'help.html') 
+    return render(request, 'user/help.html') 
 
 
 
 def protien(request):
     products = Product.objects.all()
 
-    return render(request, 'protien.html', {'products': products})
+    return render(request, 'user/protien.html', {'products': products})
 
 def creatine(request):
     products = Product.objects.all()
 
-    return render(request, 'creatine.html', {'products': products})
+    return render(request, 'usercreatine.html', {'products': products})
 
 
 def  preworkout(request):
     products = Product.objects.all()
 
-    return render(request, 'prework.html', {'products': products})
+    return render(request, 'user/prework.html', {'products': products})
 
 
 
@@ -245,3 +247,71 @@ def delete_view(request, id):
         product.delete()  # Delete the product
         messages.success(request, "Product deleted successfully!")  # Optional success message
     return redirect('sellerview')
+
+
+
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched', '').strip()  # Get the search term
+        category = request.POST.get('category', '')  # Get the selected category (if any)
+        
+        # Filter products based on the search term and category
+        results = Product.objects.all()
+        
+        if searched:
+            results = results.filter(name__icontains=searched)
+        
+        if category:
+            # Dynamically filter based on the category field
+            category_filter = {f"{category}": True}
+            results = results.filter(**category_filter)
+
+        return render(request, 'user/search.html', {'searched': searched, 'category': category, 'results': results})
+    
+    # Render the empty search page for GET requests
+    return render(request, 'user/search.html', {'searched': '', 'category': '', 'results': []})
+
+
+
+def delete_all(request):
+    cart.objects.filter(user=request.user).delete()
+    request.session['cart_cleared'] = True
+    return redirect(cart_display)
+
+
+def cart_display(request):
+    user = User.objects.get(username=request.session['username'])
+    data = cart.objects.filter(user=user)[::-1]
+    category = category.objects.select_related('product')
+
+    cart_items = []
+    grand_total_price = 0
+    grand_dis_price = 0
+
+    for item in data:
+        product_price = item.category.offer_price
+        total_price = product_price * item.quantity
+        grand_total_price += total_price
+
+        dis_price = item.category.price
+        total_dis_price = dis_price * item.quantity
+        grand_dis_price += total_dis_price
+
+        cart_items.append({
+            'cart_obj': item,
+            'total_price': total_price,
+            'total_dis_price': total_dis_price
+        })
+
+    total_discount = grand_dis_price - grand_total_price
+
+    context = {
+        'data': data,
+        'categories': category,
+        'cart_items': cart_items,
+        'total_price': grand_total_price,
+        'total_discount': total_discount,
+        'price_without_discount': grand_dis_price,
+    }
+    return render(request, 'user/cart.html', context)
+
