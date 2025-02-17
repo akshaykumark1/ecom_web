@@ -415,7 +415,9 @@ footer {
 
             <div class="navbar-right">
                 <!-- Account and Cart Links -->
+                <a href="{% url 'signin' %}" class="nav-link">Account</a>
                 <a href="{% url 'userlogout' %}" class="nav-link">LOG OUT</a>
+
                 <a href="{% url 'orders' %}" class="nav-link">Returns & Orders</a>
                 <a href="{% url 'cart' %}" class="nav-link">
                     <img src="{% static 'images/cart.png' %}" alt="" class="cart-icon">

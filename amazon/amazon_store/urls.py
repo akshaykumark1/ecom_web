@@ -5,8 +5,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('home', views.home, name='home'),
-    path('',views.signin,name='signin'),
+    path('', views.home, name='home'),
+    path('signin',views.signin,name='signin'),
     path('signup',views.signup,name='signup'),
     path('cart',views.cart,name='cart'),
     path('orders',views.orders,name='orders'),
