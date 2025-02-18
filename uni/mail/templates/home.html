@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
+    <title>Home</title>
 </head>
 <body>
-    home
+    <h2>Welcome, {{ user.username }}</h2>
+    <a href="{% url 'signin' %}">Logout</a>
 </body>
 </html>
