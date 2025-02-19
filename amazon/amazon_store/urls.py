@@ -29,6 +29,8 @@ urlpatterns = [
 
 
     path('search',views.search,name='search'),
+    path('cart_display',views.cart_display,name='cart_display'),
+    path('delete_all',views.delete_all,name='delete_all'),
 
 
 
@@ -37,7 +39,7 @@ urlpatterns = [
 
 
 
-    path('protien',views.protien,name='protien'),   
+    path('product_buy',views.product_buy,name='product_buy'),   
     path('creatine',views.creatine,name='creatine'),
     path('preworkout',views.preworkout,name='preworkout'),
 

@@ -81,10 +81,10 @@ def help(request):
 
 
 
-def protien(request):
+def product_buy(request):
     products = Product.objects.all()
 
-    return render(request, 'user/protien.html', {'products': products})
+    return render(request, 'user/product_buy.html', {'products': products})
 
 def creatine(request):
     products = Product.objects.all()

@@ -435,8 +435,8 @@ footer {
             <ul class="second-nav-links" style="font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 500;">
              
 
-                       <li> <a href="{% url 'protien' %}">Protien powder</a></li> 
-                       <li> <a href="{% url 'creatine' %}">Creatine</a></li>   
+                       <li> <a href="{% url 'product_buy' %}">Products Buy</a></li> 
+                       <li> <a href="{% url 'creatine' %}"></a></li>   
                        <li><a href="{% url 'preworkout' %}">Pre-workout</a></li>
                      
             </ul>
@@ -598,16 +598,20 @@ footer {
     </button>
 </div>
 
-
 <div class="container-fluid">
+    <h2 style="color: white;">Featured Products</h2>
+
     <div class="row justify-content-center">
         {% for i in product %}
         <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
             <div class="card">
-                <img src="{{i.image.url}}" class="card-img-top" alt="...">
+                {% if i.image1 %}
+                    <img src="{{i.image1.url}}" class="card-img-top" alt="...">
+                {% else %}
+                    <img src="path/to/default-image.jpg" class="card-img-top" alt="..."> <!-- Set a default image or leave it empty -->
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{i.title}}</h5>
-                    <p class="card-text">{{i.description}}</p>
                     <p class="card-text">Price: {{i.price}}</p>
                     <p class="card-text">Category: {{i.category}}</p>
                     <button class="btn btn-primary">Add to Cart</button>
@@ -617,7 +621,7 @@ footer {
         </div>
         {% endfor %}
     </div>
-</div>
+    
 
 
 
