@@ -295,6 +295,8 @@ body {
 
 
 
+
+
 .container-fluid {
     background-color: #000000;
 }
@@ -424,7 +426,6 @@ footer {
                 <a href="{% url 'signin' %}" class="nav-link"><i class="fa-solid fa-user" style="color: #ffffff;"></i></a>
                 <a href="{% url 'userlogout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a>
 
-                <a href="{% url 'orders' %}" class="nav-link">Returns & Orders</a>
                 <a href="{% url 'cart' %}" class="nav-link">
                     <img src="{% static 'images/cart.png' %}" alt="" class="cart-icon">
                     Cart
@@ -435,9 +436,8 @@ footer {
             <ul class="second-nav-links" style="font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 500;">
              
 
-                       <li> <a href="{% url 'product_buy' %}">Products Buy</a></li> 
-                       <li> <a href="{% url 'creatine' %}"></a></li>   
-                       <li><a href="{% url 'preworkout' %}">Pre-workout</a></li>
+                       <li> <a href="{% url 'product_buy' %}">PRODUCTS</a></li> 
+                       <li><a href="{% url 'wheretobuy' %}">WHERE TO BUY</a></li>
                      
             </ul>
         </nav>
@@ -570,33 +570,68 @@ footer {
     <!-- Product Listings -->
 
 
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="{% static 'images/coro1.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="1">
-        </div>
-        <div class="carousel-item">
-            <img src="{% static 'images/coro2.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="2">
-        </div>
-        <div class="carousel-item">
-            <img src="{% static 'images/coro3.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="3">
-        </div>
-        <div class="carousel-item">
-            <img src="{% static 'images/coro4.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="4">
-        </div>
-        <div class="carousel-item">
-            <img src="{% static 'images/coro5.jpg' %}" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="5">
-        </div>
+
+
+<style>
+    .hero-section {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background: url("{% static 'images/athlets.webp' %}") no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    .content {
+        position: relative;
+        z-index: 2;
+        max-width: 80%;
+        color: #ccc;
+    }
+    .content h1 {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    .btn-learn {
+        background: #000;
+        color: #fff;
+        border: 2px solid #fff;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    .btn-learn:hover {
+        background: #fff;
+        color: #000;
+    }
+    @media (max-width: 768px) {
+        .content h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="hero-section">
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>SUPERIOR SCIENCE.<br>SUPERIOR RESULTS.</h1>
+        <a href="{% url 'product_buy' %}"><button class="btn btn-learn">Learn More</button></a>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
 </div>
+
+
+
 
 <div class="container-fluid">
     <h2 style="color: white;">Featured Products</h2>
@@ -604,24 +639,72 @@ footer {
     <div class="row justify-content-center">
         {% for i in product %}
         <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card">
+            <div class="card shadow-sm">
                 {% if i.image1 %}
-                    <img src="{{i.image1.url}}" class="card-img-top" alt="...">
+                    <img src="{{i.image1.url}}" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;">
                 {% else %}
-                    <img src="path/to/default-image.jpg" class="card-img-top" alt="..."> <!-- Set a default image or leave it empty -->
+                    <img src="path/to/default-image.jpg" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;"> <!-- Set a default image or leave it empty -->
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{i.title}}</h5>
                     <p class="card-text">Price: {{i.price}}</p>
                     <p class="card-text">Category: {{i.category}}</p>
-                    <button class="btn btn-primary">Add to Cart</button>
-                    <button class="btn btn-success">Buy Now</button>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-success">Buy Now</button>
+                    </div>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-    
+
+
+    <style>
+    .mission-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 40px;
+    }
+    .image-container {
+        position: relative;
+    }
+    .image-container img {
+        width: 100%;
+        max-width: 600px;
+        display: block;
+    }
+    .text-container {
+        color: white;
+        padding-left: 40px;
+    }
+    @media (max-width: 768px) {
+        .mission-section {
+            flex-direction: column;
+            text-align: center;
+        }
+        .text-container {
+            padding-left: 0;
+            margin-top: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="row mission-section">
+        <div class="col-md-6 image-container">
+            <img src="{% static 'images/stlogo.webp' %}" alt="Brand Mission">
+        </div>
+        <div class="col-md-6 text-container">
+            <h2 class="fw-bold">BRAND MISSION</h2>
+            <p>
+                <strong>Flex forge</strong> was born out of an obsession to redefine the limits of science and human potential. With our commitment to research, development and innovation, we inspire active people, fitness enthusiasts and elite athletes to grow stronger together. For more than two decades, we’ve fuelled those who raise the bar—not in pursuit of a personal best but a better way for everyone. Like you, we’re in it to build more than muscle.</p>
+        </div>
+    </div>
+</div>
 
 
 
@@ -639,17 +722,17 @@ footer {
             <div class="col-md-3 col-sm-6">
                 <h3 style="color: #ffffff;">Customer Service</h3>
                 <ul class="list-unstyled">
-                    <li><a href="#" style="color: #ffffff;">Contact Us</a></li>
-                    <li><a href="#" style="color: #ffffff;">Help</a></li>
+                    <li><a href="{% url 'help' %}" style="color: #ffffff;">Contact Us</a></li>
+                    <li><a href="{% url 'help' %}" style="color: #ffffff;">Help</a></li>
                     <li><a href="#" style="color: #ffffff;">Returns & Refunds</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-sm-6">
                 <h3 style="color: #ffffff;">Shop</h3>
                 <ul class="list-unstyled">
-                    <li><a href="#" style="color: #ffffff;">Protien powder</a></li>
+                    <li><a href="#" style="color: #ffffff;">Protien</a></li>
                     <li><a href="#" style="color: #ffffff;">Creatine</a></li>
-                    <li><a href="#" style="color: #ffffff;">Home</a></li>
+                    <li><a href="{% url 'home' %}" style="color: #ffffff;">Home</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-sm-6">

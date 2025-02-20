@@ -40,8 +40,7 @@ urlpatterns = [
 
 
     path('product_buy',views.product_buy,name='product_buy'),   
-    path('creatine',views.creatine,name='creatine'),
-    path('preworkout',views.preworkout,name='preworkout'),
+    path('wheretobuy',views.wheretobuy,name='wheretobuy')
 
 
 ] 

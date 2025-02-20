@@ -86,18 +86,8 @@ def product_buy(request):
 
     return render(request, 'user/product_buy.html', {'products': products})
 
-def creatine(request):
-    products = Product.objects.all()
-
-    return render(request, 'usercreatine.html', {'products': products})
-
-
-def  preworkout(request):
-    products = Product.objects.all()
-
-    return render(request, 'user/prework.html', {'products': products})
-
-
+def wheretobuy(request):
+    return render(request,'user/wheretobuy.html')
 
 
 
