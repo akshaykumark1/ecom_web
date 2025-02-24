@@ -89,13 +89,26 @@ def product_buy(request):
 def wheretobuy(request):
     return render(request,'user/wheretobuy.html')
 
+def buy_now(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'buy_now.html', {'product': product})
 
 
 
 
 
+def process_payment(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    # Add payment logic here (e.g., integrate with Stripe, PayPal, etc.)
+    return render(request, 'payment_success.html', {'product': product})
 
 
+
+
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'product_detail.html', {'product': product})
 
 
 

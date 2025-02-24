@@ -40,7 +40,11 @@ urlpatterns = [
 
 
     path('product_buy',views.product_buy,name='product_buy'),   
-    path('wheretobuy',views.wheretobuy,name='wheretobuy')
+    path('wheretobuy',views.wheretobuy,name='wheretobuy'),
+    path('buy-now/<int:product_id>/', views.buy_now, name='buy_now'),
+    path('process-payment/<int:product_id>/', views.process_payment, name='process_payment'),
+    path('product/<int:product_id>/', views.product_detail, name='product_detail'),
+
 
 
 ] 
