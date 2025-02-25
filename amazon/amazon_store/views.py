@@ -72,7 +72,34 @@ def userlogout(request):
 
 
 def cart(request):
-    return render(request, 'user/cart.html')    
+    cart_items = request.session.get("cart_items", [])  # Retrieve cart from session
+    total_price = sum(item["price"] * item["quantity"] for item in cart_items)
+
+    return render(request, "user/cart.html", {"cart_items": cart_items, "total_price": total_price})
+
+
+def addcart(request):
+    if request.method == "POST":
+        product_name = request.POST.get("name")
+        product_price = int(request.POST.get("price"))
+        product_image = request.POST.get("image_url")
+        
+        cart_items = request.session.get("cart_items", [])
+
+        # Check if product already exists, then update quantity
+        for item in cart_items:
+            if item["name"] == product_name:
+                item["quantity"] += 1
+                break
+        else:
+            cart_items.append({"name": product_name, "price": product_price, "quantity": 1, "image_url": product_image})
+
+        request.session["cart_items"] = cart_items  # Save cart to session
+        request.session.modified = True  # Ensure session updates
+
+        return render(request, "user/cart.html")  # Redirect to cart page
+
+
 
 def orders(request):
     return render(request, 'user/orders.html')  
@@ -253,68 +280,43 @@ def delete_view(request, id):
 
 
 
-def search(request):
-    if request.method == 'POST':
-        searched = request.POST.get('searched', '').strip()  # Get the search term
-        category = request.POST.get('category', '')  # Get the selected category (if any)
+# def search(request):
+#     if request.method == 'POST':
+#         searched = request.POST.get('searched', '').strip()  # Get the search term
+#         category = request.POST.get('category', '')  # Get the selected category (if any)
         
-        # Filter products based on the search term and category
-        results = Product.objects.all()
+#         # Filter products based on the search term and category
+#         results = Product.objects.all()
         
-        if searched:
-            results = results.filter(name__icontains=searched)
+#         if searched:
+#             results = results.filter(name__icontains=searched)
         
-        if category:
-            # Dynamically filter based on the category field
-            category_filter = {f"{category}": True}
-            results = results.filter(**category_filter)
+#         if category:
+#             # Dynamically filter based on the category field
+#             category_filter = {f"{category}": True}
+#             results = results.filter(**category_filter)
 
-        return render(request, 'user/search.html', {'searched': searched, 'category': category, 'results': results})
+#         return render(request, 'user/search.html', {'searched': searched, 'category': category, 'results': results})
     
-    # Render the empty search page for GET requests
-    return render(request, 'user/search.html', {'searched': '', 'category': '', 'results': []})
+#     # Render the empty search page for GET requests
+#     return render(request, 'user/search.html', {'searched': '', 'category': '', 'results': []})
 
 
 
 def delete_all(request):
     cart.objects.filter(user=request.user).delete()
     request.session['cart_cleared'] = True
-    return redirect(cart_display)
+    return redirect(cart)
 
 
-def cart_display(request):
-    user = User.objects.get(username=request.session['username'])
-    data = cart.objects.filter(user=user)[::-1]
-    category = category.objects.select_related('product')
 
-    cart_items = []
-    grand_total_price = 0
-    grand_dis_price = 0
 
-    for item in data:
-        product_price = item.category.offer_price
-        total_price = product_price * item.quantity
-        grand_total_price += total_price
 
-        dis_price = item.category.price
-        total_dis_price = dis_price * item.quantity
-        grand_dis_price += total_dis_price
+def account(request):
+    return render(request, 'accounts/account.html')
 
-        cart_items.append({
-            'cart_obj': item,
-            'total_price': total_price,
-            'total_dis_price': total_dis_price
-        })
 
-    total_discount = grand_dis_price - grand_total_price
-
-    context = {
-        'data': data,
-        'categories': category,
-        'cart_items': cart_items,
-        'total_price': grand_total_price,
-        'total_discount': total_discount,
-        'price_without_discount': grand_dis_price,
-    }
-    return render(request, 'user/cart.html', context)
-
+def address(request):
+    return render(request,'accounts/address.html')
+def security(request):
+    return render(request,'accounts/security.html')

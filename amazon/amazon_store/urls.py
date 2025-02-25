@@ -28,12 +28,7 @@ urlpatterns = [
     
 
 
-    path('search',views.search,name='search'),
-    path('cart_display',views.cart_display,name='cart_display'),
-    path('delete_all',views.delete_all,name='delete_all'),
-
-
-
+ 
 
 
 
@@ -44,9 +39,21 @@ urlpatterns = [
     path('buy-now/<int:product_id>/', views.buy_now, name='buy_now'),
     path('process-payment/<int:product_id>/', views.process_payment, name='process_payment'),
     path('product/<int:product_id>/', views.product_detail, name='product_detail'),
+    path('account',views.account,name='account'),
 
 
 
-] 
+
+    # path("cart/", views.cart, name="cart"),
+    path("addcart/", views.addcart, name="addcart"),
+
+
+    
+    path('address',views.address,name='address'),
+    path('security',views.security,name='security'),
+]
+
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
