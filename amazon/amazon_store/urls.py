@@ -40,12 +40,14 @@ urlpatterns = [
     path('process-payment/<int:product_id>/', views.process_payment, name='process_payment'),
     path('product/<int:product_id>/', views.product_detail, name='product_detail'),
     path('account',views.account,name='account'),
+    # path('product')
 
 
 
 
     # path("cart/", views.cart, name="cart"),
     path("addcart/", views.addcart, name="addcart"),
+
 
 
     

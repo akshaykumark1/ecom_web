@@ -320,3 +320,8 @@ def address(request):
     return render(request,'accounts/address.html')
 def security(request):
     return render(request,'accounts/security.html')
+def product_display(request):
+    products = Product.objects.all()
+    
+    return render(request, 'user/product_buy.html', {'products': products})
+
