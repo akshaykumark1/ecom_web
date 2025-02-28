@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="col-6 mx-auto" style="margin-top:10%;">
-    <form action="{% url 'payment' %}" method="POST">
+    <form action="{% url 'order_payment' %}" method="POST">
         {% csrf_token %}
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Name</label>
@@ -23,7 +23,6 @@
         </div>
     </form>
 </div>
-{% endblock %}
 
 <form method="post">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -56,7 +55,7 @@
     </script>
     <input type="hidden" custom="Hidden Element" name="hidden">
 </form>
-{% endblock %}
+{% endblock content %}
 </body>
 </html>
 
