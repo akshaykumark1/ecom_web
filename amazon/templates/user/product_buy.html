@@ -1,45 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 
-    <div class="container-fluid">
-        <h2 style="color: black; font-weight: bold;">Featured Products</h2>
-    
-        <div class="row justify-content-center">
+    {% extends 'user/mainhead.html' %}
 
-            {% for i in products %}
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="card shadow-sm border-0">
-                    <div style="display: flex; justify-content: center; align-items: center; padding: 10px; background: white;">
-                        {% if i.image1 %}
-                          <a href="{% url 'product_detail' i.id %}"> <img src="{{ i.image1.url }}" class="card-img-top" alt="Product Image" style="height: 200px; width: auto; object-fit: contain;"></a>
-                        {% else %}
-                            <img src="path/to/default-image.jpg" class="card-img-top" alt="Default Image" style="height: 200px; width: auto; object-fit: contain;">
-                        {% endif %}
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title font-weight-bold">{{ i.title }}</h6>
-                        <p class="text-muted small">⭐ {{ i.rating }} | {{ i.reviews }} reviews</p>
-                        <p class="font-weight-bold text-danger">₹{{ i.discounted_price }} <span class="text-muted small"><s>₹{{ i.original_price }}</s> ({{ i.discount }}% off)</span></p>
-                        <p class="text-success small">Free Delivery {{ i.delivery_date }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="{% url 'product_detail' i.id %}" class="btn btn-warning btn-sm">Add to Cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    
+{% block content %}
+{% include 'user/allpro.html' %}
+{% endblock content %}
     
 
-
     
-</body>
-</html>

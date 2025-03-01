@@ -116,9 +116,8 @@ def product_buy(request):
 def wheretobuy(request):
     return render(request,'user/wheretobuy.html')
 
-def buy_now(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    return render(request, 'buy_now.html', {'product': product})
+def buy_now(request):
+    return render(request,'buy_now.html')
 
 
 
@@ -133,9 +132,8 @@ def process_payment(request, product_id):
 
 
 
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    return render(request, 'product_detail.html', {'product': product})
+def product_detail(request):
+    return render(request,'product_detail.html')
 
 
 
