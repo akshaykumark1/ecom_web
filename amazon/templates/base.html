@@ -392,58 +392,7 @@ footer {
   }
 }
 
-    </style>
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <header>
-        <nav class="navbar">
-            <div class="navbar-left">
-                <div id="nav-logo"> <a style="text-decoration: none; color: #ffffff;" href="{% url 'home' %}"><h3>FLEX FORGE</h3></div>
-                <!-- Categories Dropdown -->
-                <div class="dropdown">
-                    <button class="dropbtn">COUNTRY</button>
-                    <div class="dropdown-content">
-
-                        <a href="#"><img src="{% static 'images/uae.webp' %}" alt="UAE" style="height: 20px; width: 20px;">UAE</a>
-                        <a href="#"><img src="{% static 'images/usa.png' %}" alt="UAE" style="height: 20px; width: 20px;">USA</a>
-                        <a href="#"><img src="{% static 'images/uk.jpg' %}" alt="UAE" style="height: 20px; width: 20px;">UK</a>
-                        <a href="#"><img src="{% static 'images/india.png' %}" alt="UAE" style="height: 20px; width: 20px;">INDIA</a>
-        
-                       
-                    </div>
-                </div>
-            </div>
-
-            <div class="navbar-center">
-                <!-- Search Bar -->
-                <input type="text" class="search-input" placeholder="Search for products, brands, and more" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; outline: none;">
-                <button class="search-btn" style="background-color: #000000; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Search</button>
-            </div>
-
-            <div class="navbar-right">
-                <!-- Account and Cart Links -->
-                <a href="{% url 'account' %}" class="nav-link"><i class="fa-solid fa-user" style="color: #ffffff;"></i></a>
-                <a href="{% url 'userlogout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a>
-
-                <a href="{% url 'cart' %}" class="nav-link">
-                    <img src="{% static 'images/cart.png' %}" alt="" class="cart-icon">
-                    Cart
-                </a>
-            </div>
-        </nav>
-        <nav class="second-navbar">
-            <ul class="second-nav-links" style="font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 500;">
-             
-
-                       <li> <a href="{% url 'product_buy' %}">PRODUCTS</a></li> 
-                       <li><a href="{% url 'wheretobuy' %}">WHERE TO BUY</a></li>
-                     
-            </ul>
-        </nav>
-    </header>
-
-    <style>
+  
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -566,13 +515,12 @@ footer {
                 display: none;
             }
         }
-    </style>
-    <!-- Product Listings -->
+    
+   
 
 
 
 
-<style>
     .hero-section {
         position: relative;
         width: 100%;
@@ -619,9 +567,98 @@ footer {
             font-size: 2rem;
         }
     }
+
+
+    
+
+
+
+    
+    .container-1{
+        background-color: black;
+    }       
+    .mission-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 40px;
+    }
+    .image-container {
+        position: relative;
+    }
+    .image-container img {
+        width: 100%;
+        max-width: 600px;
+        display: block;
+    }
+    .text-container {
+        color: white;
+        padding-left: 40px;
+    }
+    @media (max-width: 768px) {
+        .mission-section {
+            flex-direction: column;
+            text-align: center;
+        }
+        .text-container {
+            padding-left: 0;
+            margin-top: 20px;
+        }
+    }
 </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <div id="nav-logo"> <a style="text-decoration: none; color: #ffffff;" href="{% url 'home' %}"><h3>FLEX FORGE</h3></div>
+                <!-- Categories Dropdown -->
+                <div class="dropdown">
+                    <button class="dropbtn">COUNTRY</button>
+                    <div class="dropdown-content">
+
+                        <a href="#"><img src="{% static 'images/uae.webp' %}" alt="UAE" style="height: 20px; width: 20px;">UAE</a>
+                        <a href="#"><img src="{% static 'images/usa.png' %}" alt="UAE" style="height: 20px; width: 20px;">USA</a>
+                        <a href="#"><img src="{% static 'images/uk.jpg' %}" alt="UAE" style="height: 20px; width: 20px;">UK</a>
+                        <a href="#"><img src="{% static 'images/india.png' %}" alt="UAE" style="height: 20px; width: 20px;">INDIA</a>
+        
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-center">
+                <!-- Search Bar -->
+                <input type="text" class="search-input" placeholder="Search for products, brands, and more" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; outline: none;">
+                <button class="search-btn" style="background-color: #000000; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Search</button>
+            </div>
+
+            <div class="navbar-right">
+                <!-- Account and Cart Links -->
+                <a href="{% url 'account' %}" class="nav-link"><i class="fa-solid fa-user" style="color: #ffffff;"></i></a>
+                <a href="{% url 'userlogout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a>
+
+                <a href="{% url 'cart' %}" class="nav-link">
+                    <img src="{% static 'images/cart.png' %}" alt="" class="cart-icon">
+                    Cart
+                </a>
+            </div>
+        </nav>
+        <nav class="second-navbar">
+            <ul class="second-nav-links" style="font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 500;">
+             
+
+                       <li> <a href="{% url 'product_buy' %}">PRODUCTS</a></li> 
+                       <li><a href="{% url 'wheretobuy' %}">WHERE TO BUY</a></li>
+                     
+            </ul>
+        </nav>
+    </header>
+
+  
+
 <div class="hero-section">
     <div class="overlay"></div>
     <div class="content">
@@ -667,42 +704,8 @@ footer {
 </div>
 
 
-    <style>
-    .container-1{
-        background-color: black;
-    }       
-    .mission-section {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 40px;
-    }
-    .image-container {
-        position: relative;
-    }
-    .image-container img {
-        width: 100%;
-        max-width: 600px;
-        display: block;
-    }
-    .text-container {
-        color: white;
-        padding-left: 40px;
-    }
-    @media (max-width: 768px) {
-        .mission-section {
-            flex-direction: column;
-            text-align: center;
-        }
-        .text-container {
-            padding-left: 0;
-            margin-top: 20px;
-        }
-    }
-</style>
-</head>
-<body>
+
+
 <div class="container-1">
     <div class="row mission-section">
         <div class="col-md-6 image-container">
