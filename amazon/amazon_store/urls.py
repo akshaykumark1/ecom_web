@@ -38,7 +38,7 @@ urlpatterns = [
     path('wheretobuy',views.wheretobuy,name='wheretobuy'),
     path('buy-now', views.buy_now, name='buy_now'),
     path('process-payment/<int:product_id>/', views.process_payment, name='process_payment'),
-    path('product_detail', views.product_detail, name='product_detail'),
+    path('product_detail/<int:pk>/', views.product_detail, name='product_detail'),
     path('account',views.account,name='account'),
     # path('product')
 
@@ -53,6 +53,13 @@ urlpatterns = [
     
     path('address',views.address,name='address'),
     path('security',views.security,name='security'),
+
+
+
+
+
+
+    
 ]
 
 

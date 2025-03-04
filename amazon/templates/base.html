@@ -679,7 +679,7 @@ footer {
             <div class="card shadow-sm border-0">
                 <div style="display: flex; justify-content: center; align-items: center; padding: 10px; background: white;">
                     {% if i.image1 %}
-                      <a href="{% url 'product_detail' %}"> <img src="{{ i.image1.url }}" class="card-img-top" alt="Product Image" style="height: 200px; width: auto; object-fit: contain;"></a>
+                      <a href="{% url 'product_detail' i.id %}"> <img src="{{ i.image1.url }}" class="card-img-top" alt="Product Image" style="height: 200px; width: auto; object-fit: contain;"></a>
                     {% else %}
                         <img src="path/to/default-image.jpg" class="card-img-top" alt="Default Image" style="height: 200px; width: auto; object-fit: contain;">
                     {% endif %}
