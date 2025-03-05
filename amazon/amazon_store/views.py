@@ -132,9 +132,9 @@ def process_payment(request, product_id):
 
 
 
-def product_detail(request):
-    return render(request,'product_detail.html')
-
+def product_detail(request,pk):
+    product = get_object_or_404(Product, id=pk)
+    return render(request, 'product_detail.html', {'product': product})
 
 
 
