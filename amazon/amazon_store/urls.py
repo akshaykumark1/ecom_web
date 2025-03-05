@@ -15,7 +15,6 @@ urlpatterns = [
 
 
 
-
     path('sellerhome',views.seller,name='seller'),
     path('seller',views.sellerin,name='sellerin'),
     path('registration',views.registration,name='registration'),
@@ -29,8 +28,6 @@ urlpatterns = [
 
 
  
-
-
 
 
 

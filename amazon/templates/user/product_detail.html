@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #121212;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+    }
+    .product-container {
+      margin-top: 50px;
+    }
+    .product-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .product-details {
+      padding-left: 30px;
+    }
+    .product-details h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    .product-details p {
+      font-size: 1.1rem;
+      color: #bbb;
+    }
+    .product-price {
+      font-size: 1.8rem;
+      color: #f39c12;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .btn-custom {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      transition: all 0.3s ease-in-out;
+      color: #fff;
+    }
+    .btn-add-to-cart {
+      background-color: #333;
+      border: none;
+    }
+    .btn-buy-now {
+      background-color: #555;
+      border: none;
+    }
+
+
+
+  </style>
+</head>
+
+
+
+<div class="container product-container">
+  <div class="row">
+    <!-- First Image (Large) -->
+    <div class="col-md-6">
+      {% if product.image1 and product.image1.url %}
+        <img src="{{ product.image1.url }}" alt="Product Image" class="product-image" width="500" height="500">
+      {% else %}
+        <p>No Image 1</p>
+      {% endif %}
+    </div>
+
+    <!-- Product Details & Other Images -->
+    <div class="col-md-6 product-details">
+      <h2>{{ product.title }}</h2>
+      <p>{{ product.description }}</p>
+      <p class="product-price">₹{{ product.discounted_price }} <span class="text-muted"><s>₹{{ product.original_price }}</s></span> ({{ product.discount }} offer price :)</p>
+      <p class="text-success">Free Delivery by {{ product.delivery_date }}</p>
+
+      <!-- Smaller Images Near the Text -->
+      <div class="d-flex gap-3 mb-3">
+        {% if product.image2 and product.image2.url %}
+          <img src="{{ product.image2.url }}" alt="Product Image" width="100" height="100" class="small-image">
+        {% endif %}
+        {% if product.image3 and product.image3.url %}
+          <img src="{{ product.image3.url }}" alt="Product Image" width="100" height="100" class="small-image">
+        {% endif %}
+        {% if product.image4 and product.image4.url %}
+          <img src="{{ product.image4.url }}" alt="Product Image" width="100" height="100" class="small-image">
+        {% endif %}
+        {% if product.image5 and product.image5.url %}
+          <img src="{{ product.image5.url }}" alt="Product Image" width="100" height="100" class="small-image">
+        {% endif %}
+      </div>
+
+      <div class="d-flex gap-3">
+        <button class="btn btn-custom btn-add-to-cart">Add to Cart</button>
+        <button class="btn btn-custom btn-buy-now">Buy Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
