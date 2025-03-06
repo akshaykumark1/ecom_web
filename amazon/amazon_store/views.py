@@ -27,12 +27,16 @@ def signin(request):
             return render(request, 'signin.html')
         
         user = authenticate(request, username=username, password=password)
+
         
         if user is not None:
             login(request, user)
             request.session['username'] = user.username
             request.session['user_id'] = user.id
+            if user.is_superuser:
+                return redirect('seller')
             return redirect('home')
+        
         else:
             messages.error(request, 'Invalid username or password.')
     return render(request, 'signin.html')
@@ -192,7 +196,7 @@ def registration(request):
 
 def slogout(request):
     request.session.flush()
-    return render(request, 'seller/sellerin.html')  # A custom template after logout
+    return render(request, 'base.html')  # A custom template after logout
 
 
 @login_required(login_url='sellerin')
