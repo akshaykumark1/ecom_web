@@ -79,7 +79,7 @@
     <div class="col-md-6 product-details">
       <h2>{{ product.title }}</h2>
       <p>{{ product.description }}</p>
-      <p class="product-price">₹{{ product.discounted_price }} <span class="text-muted"><s>₹{{ product.original_price }}</s></span> ({{ product.discount }} offer price :)</p>
+      <p class="product-price">₹{{ product.discounted_price }} <span class="text-muted"><s>₹{{ product.original_price }}</s></span> {{ product.discount }} offer price :</p>
       <p class="text-success">Free Delivery by {{ product.delivery_date }}</p>
 
       <!-- Smaller Images Near the Text -->

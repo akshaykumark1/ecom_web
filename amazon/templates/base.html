@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLEX FORGE</title>
+    <title>FLEX FORGE | strenght redefined</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -19,7 +19,7 @@
         }
 
         body {
-            background-color: #000000;
+            background-color: #ffffff;
         }
 
         @media (max-width: 768px) {
@@ -43,154 +43,7 @@
             }
         }
 
-        /* Navbar styles */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #000000;
-            padding: 10px 20px;
-        }
 
-        /* Left section (Logo and Categories) */
-        .navbar-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
-            height: 80px; /* Increased height for a bigger logo */
-            width: 80px;  /* Increased width for a bigger logo */
-            object-fit: contain;
-            margin-right: 20px;
-            text-decoration: none;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            margin-left: 20px;
-        }
-
-        .dropbtn {
-            background-color: #000000;
-            color: white;
-            padding: 8px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .dropbtn:hover {
-            background-color: #f0c14b;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            min-width: 160px;
-            z-index: 1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        /* Center section (Search Bar) */
-        .navbar-center {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-input {
-            width: 50%;
-            padding: 8px;
-            font-size: 16px;
-            border: none;
-        }
-
-        .search-btn {
-            padding: 8px 20px;
-            background-color: #f0c14b;
-            border: none;
-            cursor: pointer;
-            color: #111;
-            font-size: 16px;
-        }
-
-        .search-btn:hover {
-            background-color: #e2a800;
-        }
-
-        /* Right section (Account and Cart) */
-        .navbar-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            font-size: 14px;
-            margin-left: 20px;
-        }
-
-        .nav-link:hover {
-            background-color: #f0c14b;
-            border-radius: 5px;
-        }
-
-        /* Cart icon */
-        .cart-icon {
-            width: 20px;
-            margin-right: 5px;
-        }
-
-        .second-navbar {
-            background-color: #000000;  /* Slightly lighter color than main navbar */
-            padding: 10px 0;
-        }
-
-        .second-navbar .second-nav-links {
-            list-style: none;
-            display: flex;
-            justify-content: center;  /* Centers the items in the navbar */
-            margin: 0;
-            padding: 0;
-        }
-
-        .second-nav-links li {
-            margin: 0 15px;
-        }
-
-        .second-nav-links li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: bold;
-            margin-right: 20px;
-        }
-
-        .second-nav-links li a:hover {
-            color: #ff9900;  /* Highlight color on hover */
-        }
-
-
-        /* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
@@ -200,7 +53,7 @@
 /* Body and general layout */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     color: #333;
 }
 
@@ -208,7 +61,7 @@ body {
 .product-listing {
     padding: 40px 20px;
     text-align: center;
-    background-color: #f1fdd1;
+    background-color: #ffffff;
     /* background-image: url("{% static 'images/amazon-g.jpg' %}"); */
 }
 
@@ -227,7 +80,7 @@ body {
 }
 
 .product {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -298,13 +151,13 @@ body {
 
 
 .container-fluid {
-    background-color: #000000;
+    background-color: #ffffff;
 }
 
 /* General Footer Styling */
 footer {
-  background-color: #000000; /* Dark blue background for Amazon-like theme */
-  color: #fff; /* White text */
+  background-color: #ffffff; /* Dark blue background for Amazon-like theme */
+  color: #000000; /* White text */
   padding: 40px 20px;
   font-family: Arial, sans-serif;
   text-align: left;
@@ -341,7 +194,7 @@ footer {
 }
 
 .footer-column ul li a {
-  color: #ccc;
+  color: #fff9f9;
   text-decoration: none;
   font-size: 14px;
   transition: color 0.3s ease;
@@ -367,7 +220,7 @@ footer {
 
 .footer-bottom p {
   margin: 0;
-  color: #ccc;
+  color: #ffffff;
 }
 
 
@@ -392,80 +245,12 @@ footer {
   }
 }
 
-  
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #000000;
-        }
-
-        .navbar-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar-left > * {
-            margin-right: 10px;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropbtn {
-            background-color: #000000;
-            color: white;
-            padding: 8px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            min-width: 160px;
-            z-index: 1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        .search-input {
-            flex-grow: 1;
-        }
-
-        .search-btn {
-            padding: 10px 20px;
-            border: none;
-        }
-
-        .navbar-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar-right > * {
-            margin-left: 10px;
-        }
+.navbar a:hover {
+    color: #ff9900; /* Amazon orange color for hover effect */
+}
 
         .second-navbar {
-            background-color: #000000;
+            background-color: #dbd6d6;
             padding: 10px 0;
         }
 
@@ -606,45 +391,80 @@ footer {
             margin-top: 20px;
         }
     }
+
+
+    
+            .header-purple {
+                background: linear-gradient(135deg, #000000 0%, #000000 100%);
+                color: white;
+                padding: 50px 0;
+                position: relative;
+                overflow: hidden;
+            }
+            .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .product-image {
+                height: 250px;
+                object-fit: contain;
+                padding: 20px;
+                background-color: #f5f7fa;
+            }
+            .sidebar-heading {
+                background-color: #000;
+                color: white;
+                padding: 10px 15px;
+                font-weight: bold;
+            }
+
+        
  
 </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <header>
-        <nav class="navbar">
-            <div class="navbar-left">
-                <div id="nav-logo"> <a style="text-decoration: none; color: #ffffff;" href="{% url 'home' %}"><h3>FLEX FORGE</h3></div>
-                <!-- Categories Dropdown -->
-                <div class="dropdown">
-                    <button class="dropbtn">COUNTRY</button>
-                    <div class="dropdown-content">
-
-                        <a href="#"><img src="{% static 'images/uae.webp' %}" alt="UAE" style="height: 20px; width: 20px;">UAE</a>
-                        <a href="#"><img src="{% static 'images/usa.png' %}" alt="UAE" style="height: 20px; width: 20px;">USA</a>
-                        <a href="#"><img src="{% static 'images/uk.jpg' %}" alt="UAE" style="height: 20px; width: 20px;">UK</a>
-                        <a href="#"><img src="{% static 'images/india.png' %}" alt="UAE" style="height: 20px; width: 20px;">INDIA</a>
-        
-                       
-                    </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home' %}">FLEX FORGE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto text-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'product_buy' %}">PRODUCTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'wheretobuy' %}">WHERE TO BUY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'account' %}" class="nav-link"><i class="fa-solid fa-user"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'userlogout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'cart' %}" class="nav-link">
+                                <img src="{% static 'images/cart.png' %}" alt="Cart" width="30" height="24">
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">MORE</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Blog</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'help' %}">Contact</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                </button>
+                    </form>
                 </div>
-            </div>
-
-            <div class="navbar-center">
-                <!-- Search Bar -->
-                <input type="text" class="search-input" placeholder="Search for products, brands, and more" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; outline: none;">
-                <button class="search-btn" style="background-color: #000000; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Search</button>
-            </div>
-
-            <div class="navbar-right">
-                <!-- Account and Cart Links -->
-                <a href="{% url 'account' %}" class="nav-link"><i class="fa-solid fa-user" style="color: #ffffff;"></i></a>
-                <a href="{% url 'userlogout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a>
-
-                <a href="{% url 'cart' %}" class="nav-link">
-                    <img src="{% static 'images/cart.png' %}" alt="" class="cart-icon">
-                    Cart
-                </a>
             </div>
         </nav>
         <nav class="second-navbar">
@@ -766,5 +586,6 @@ footer {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>  
 </body>
 </html>
+
 
 
