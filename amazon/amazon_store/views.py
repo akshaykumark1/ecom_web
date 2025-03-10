@@ -237,7 +237,6 @@ def selleradd(request):
 
 def sellerview(request):
     products = Product.objects.all()
-    
     return render(request, 'seller/seller.html', {'products': products})
 
 
@@ -313,15 +312,15 @@ def delete_all(request):
 
 
 
-
 def account(request):
     return render(request, 'accounts/account.html')
 
-
 def address(request):
     return render(request,'accounts/address.html')
+
 def security(request):
     return render(request,'accounts/security.html')
+
 def product_display(request):
     products = Product.objects.all()
     
