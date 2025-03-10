@@ -57,53 +57,164 @@
       border: none;
     }
 
+  /* Product Page Container */
+  .product-container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px;
+      background: rgb(145, 144, 144);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  }
 
+  /* Large Image */
+  .product-image {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      transition: transform 0.3s ease-in-out;
+  }
+
+  .product-image:hover {
+      transform: scale(1.05);
+  }
+
+  /* Small Image Thumbnails */
+  .small-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .small-image:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Product Details */
+  .product-details h2 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+  }
+
+  .product-details p {
+      font-size: 16px;
+      color: #555;
+  }
+
+  /* Price & Discount */
+  .product-price {
+      font-size: 22px;
+      font-weight: 700;
+      color: #e63946;
+  }
+
+  .text-muted s {
+      color: #777;
+      font-size: 18px;
+  }
+
+  /* Buttons */
+  .btn-custom {
+      font-size: 16px;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+  }
+
+  .btn-add-to-cart {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: white;
+      border: none;
+  }
+
+  .btn-add-to-cart:hover {
+      background: linear-gradient(135deg, #fad0c4, #ff9a9e);
+      transform: scale(1.05);
+  }
+
+  .btn-buy-now {
+      background: linear-gradient(135deg, #f8c291, #e77f67);
+      color: white;
+      border: none;
+  }
+
+  .btn-buy-now:hover {
+      background: linear-gradient(135deg, #e77f67, #f8c291);
+      transform: scale(1.05);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+      .product-container {
+          padding: 20px;
+      }
+      .small-image {
+          width: 60px;
+          height: 60px;
+      }
+      .btn-custom {
+          font-size: 14px;
+          padding: 10px 15px;
+      }
+  }
+</style>
 
   </style>
 </head>
 
 
 
+
 <div class="container product-container">
-  <div class="row">
-    <!-- First Image (Large) -->
-    <div class="col-md-6">
-      {% if product.image1 and product.image1.url %}
-        <img src="{{ product.image1.url }}" alt="Product Image" class="product-image" width="500" height="500">
-      {% else %}
-        <p>No Image 1</p>
+<div class="row">
+  <!-- First Image (Large) -->
+  <div class="col-md-6">
+    {% if product.image1 and product.image1.url %}
+      <img src="{{ product.image1.url }}" alt="Product Image" class="product-image">
+    {% else %}
+      <p>No Image 1</p>
+    {% endif %}
+  </div>
+
+  <!-- Product Details & Other Images -->
+  <div class="col-md-6 product-details">
+    <h2>{{ product.title }}</h2>
+    <p>{{ product.description }}</p>
+    <p class="product-price">₹{{ product.discounted_price }} 
+      <span class="text-muted"><s>₹{{ product.original_price }}</s></span> ({{ product.discount }} Offer price)
+    </p>
+    <p class="text-success">Free Delivery by {{ product.delivery_date }}</p>
+
+    <!-- Smaller Images Near the Text -->
+    <div class="d-flex gap-3 mb-3">
+      {% if product.image2 and product.image2.url %}
+        <img src="{{ product.image2.url }}" alt="Product Image" class="small-image">
+      {% endif %}
+      {% if product.image3 and product.image3.url %}
+        <img src="{{ product.image3.url }}" alt="Product Image" class="small-image">
+      {% endif %}
+      {% if product.image4 and product.image4.url %}
+        <img src="{{ product.image4.url }}" alt="Product Image" class="small-image">
+      {% endif %}
+      {% if product.image5 and product.image5.url %}
+        <img src="{{ product.image5.url }}" alt="Product Image" class="small-image">
       {% endif %}
     </div>
 
-    <!-- Product Details & Other Images -->
-    <div class="col-md-6 product-details">
-      <h2>{{ product.title }}</h2>
-      <p>{{ product.description }}</p>
-      <p class="product-price">₹{{ product.discounted_price }} <span class="text-muted"><s>₹{{ product.original_price }}</s></span> {{ product.discount }} offer price :</p>
-      <p class="text-success">Free Delivery by {{ product.delivery_date }}</p>
-
-      <!-- Smaller Images Near the Text -->
-      <div class="d-flex gap-3 mb-3">
-        {% if product.image2 and product.image2.url %}
-          <img src="{{ product.image2.url }}" alt="Product Image" width="100" height="100" class="small-image">
-        {% endif %}
-        {% if product.image3 and product.image3.url %}
-          <img src="{{ product.image3.url }}" alt="Product Image" width="100" height="100" class="small-image">
-        {% endif %}
-        {% if product.image4 and product.image4.url %}
-          <img src="{{ product.image4.url }}" alt="Product Image" width="100" height="100" class="small-image">
-        {% endif %}
-        {% if product.image5 and product.image5.url %}
-          <img src="{{ product.image5.url }}" alt="Product Image" width="100" height="100" class="small-image">
-        {% endif %}
-      </div>
-
-      <div class="d-flex gap-3">
-        <button class="btn btn-custom btn-add-to-cart">Add to Cart</button>
-        <button class="btn btn-custom btn-buy-now">Buy Now</button>
-      </div>
+    <!-- Buttons -->
+    <div class="d-flex gap-3">
+      <button class="btn btn-custom btn-add-to-cart">Add to Cart</button>
+      <button class="btn btn-custom btn-buy-now">Buy Now</button>
     </div>
   </div>
+</div>
 </div>
 
 
