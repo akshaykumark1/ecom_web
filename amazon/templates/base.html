@@ -596,7 +596,7 @@ footer {
                     {% endif %}
                 </div>
                 <div class="card-body text-center">
-                    <form action="{% url 'addcart' %}" method="POST">
+                    <form action="#" method="POST">
                         {% csrf_token %}
                         <h6 class="card-title">{{ i.title }}</h6>
                         <p class="text-muted small">⭐ {{ i.rating }} | {{ i.reviews }} reviews</p>

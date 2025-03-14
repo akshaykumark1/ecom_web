@@ -64,7 +64,8 @@ def signup(request):
 
 
 
-
+def cart(request):
+    return render(request, 'user/cart.html')
 
 def userlogout(request):
     logout(request)
@@ -75,33 +76,13 @@ def userlogout(request):
 
 
 
-def cart(request):
-    cart_items = request.session.get("cart_items", [])  # Retrieve cart from session
-    total_price = sum(item["price"] * item["quantity"] for item in cart_items)
-
-    return render(request, "user/cart.html", {"cart_items": cart_items, "total_price": total_price})
 
 
-def addcart(request):
-    if request.method == "POST":
-        product_name = request.POST.get("name")
-        product_price = int(request.POST.get("price"))
-        product_image = request.POST.get("image_url")
-        
-        cart_items = request.session.get("cart_items", [])
 
-        # Check if product already exists, then update quantity
-        for item in cart_items:
-            if item["name"] == product_name:
-                item["quantity"] += 1
-                break
-        else:
-            cart_items.append({"name": product_name, "price": product_price, "quantity": 1, "image_url": product_image})
 
-        request.session["cart_items"] = cart_items  # Save cart to session
-        request.session.modified = True  # Ensure session updates
 
-        return render(request, "user/cart.html")  # Redirect to cart page
+
+
 
 
 

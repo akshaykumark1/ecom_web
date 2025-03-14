@@ -44,7 +44,12 @@ class Product(models.Model):
 class Cart(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     
+    def calculate_price(self):
+        self.price = self.product.price * self.quantity
+        self.save()
 
     def __str__(self):
         return f"{self.product.title} (x{self.quantity})"
@@ -58,3 +63,21 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order of {self.product.title} (x{self.quantity})"
+
+
+
+# adress model
+class Address(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    zip_code = models.CharField(max_length=10)
+    country = models.CharField(max_length=255)
+
+
+# user
+class User(models.Model):
+    username = models.CharField(max_length=255)
+    email = models.EmailField()
+    password = models.CharField(max_length=255)    
