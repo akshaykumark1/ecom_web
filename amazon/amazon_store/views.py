@@ -65,6 +65,8 @@ def signup(request):
 
 
 def cart(request):
+    # product=Product.objects.get(id=pk)
+    # Handle cart logic here
     return render(request, 'user/cart.html')
 
 def userlogout(request):

@@ -578,44 +578,31 @@ footer {
 
 
 
-<div class="container-fluid">
-    <h2 style="color: black; font-weight: bold;">Featured Products</h2> 
-
-   
- 
-    
-    <div class="row justify-content-center product-container">
+<div class="container text-center my-5">
+    <h2 class="fw-bold">FEATURED PRODUCTS</h2>
+    <div class="row mt-4">
         {% for i in product %}
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div class="card shadow-sm border-0">
-                <div style="display: flex; justify-content: center; align-items: center; padding: 15px; background: white;">
-                    {% if i.image1 %}
-                      <a href="{% url 'product_detail' i.id %}">
-                          <img src="{{ i.image1.url }}" class="card-img-top" alt="Product Image" style="height: 220px; width: auto; object-fit: contain;">
-                      </a>
-                    {% else %}
-                        <img src="path/to/default-image.jpg" class="card-img-top" alt="Default Image" style="height: 220px; width: auto; object-fit: contain;">
-                    {% endif %}
-                </div>
-                <div class="card-body text-center">
-                    <form action="#" method="POST">
-                        {% csrf_token %}
-                        <h6 class="card-title">{{ i.title }}</h6>
-                        <p class="text-muted small">⭐ {{ i.rating }} | {{ i.reviews }} reviews</p>
-                        <p class="price">₹{{ i.discounted_price }} 
-                            <span class="original-price"><s>₹{{ i.original_price }}</s> ({{ i.discount }} offer price)</span>
-                        </p>
-                        <p class="text-success small">Free Delivery {{ i.delivery_date }}</p>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <button type="submit" class="btn btn-premium">Add to Cart</button>
-                        </div>
-                    </form>
+        <div class="col-md-3">
+            <div class="card p-3 shadow-sm">
+                <img src="{{ i.image.url }}" class="card-img-top" alt="{{ i.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.name }}</h5>
+                    <p class="text-muted">{{ i.category }}</p>
+                    <a href="{% url 'product_detail' i.id %}" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-
+    <h3 class="mt-5">SHOP BY CATEGORY</h3>
+    <div class="d-flex justify-content-center gap-2 mt-3">
+        <button class="btn btn-outline-dark">PROTEIN</button>
+        <button class="btn btn-outline-dark">WEIGHT LOSS</button>
+        <button class="btn btn-outline-dark">PRE-WORKOUT</button>
+        <button class="btn btn-outline-dark">POST-WORKOUT</button>
+        <button class="btn btn-outline-dark">MUSCLEBUILDING</button>
+    </div>
+</div>
 <div class="container-1">
     <div class="row mission-section">
         <div class="col-md-6 image-container">
