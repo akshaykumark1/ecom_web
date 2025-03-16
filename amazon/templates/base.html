@@ -510,11 +510,69 @@ footer {
             justify-content: center;
         }
     
+
+        .social-section {
+            background-color: #f5f5f5;
+            padding: 3rem 1rem;
+        }
+
+        .social-heading {
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: #666;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .social-heading {
+                font-size: 1.25rem;
+            }
+            
+            .social-icons {
+                gap: 1.5rem;
+            }
+            
+            .social-icon {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .social-heading {
+                font-size: 1rem;
+            }
+            
+            .social-icons {
+                gap: 1rem;
+            }
+        }
+
 </style>
 </head>
 <body>
     <!-- Navigation Bar -->
+
     <header>
+        
+        
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'home' %}">FLEX FORGE</a>
@@ -529,6 +587,7 @@ footer {
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'wheretobuy' %}">WHERE TO BUY</a>
                         </li>
+                      
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">MORE</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -562,6 +621,10 @@ footer {
             <ul class="second-nav-links" style="font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 500;">
                 <li><a href="{% url 'product_buy' %}">PRODUCTS</a></li> 
                 <li><a href="{% url 'wheretobuy' %}">WHERE TO BUY</a></li>
+                <li>  <div class="container">
+                    <a href="{% url 'signup' %}" class="newsletter-link">SIGN UP FOR OUR NEWSLETTER</a>
+                </div>
+            </li>
             </ul>
         </nav>
     </header>
@@ -615,6 +678,41 @@ footer {
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+     
+    <div class="social-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2 class="social-heading">FOLLOW US ON SOCIAL @MUSCLETECH</h2>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/muscletech/" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@muscletech" class="social-icon">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://www.facebook.com/muscletech" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/muscletech" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.youtube.com/muscletech" class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
