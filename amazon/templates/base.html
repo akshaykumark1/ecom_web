@@ -607,10 +607,12 @@ footer {
                             </button>
                         </form>
                         
-                        <a href="{% url 'account' %}" class="nav-link me-2"><i class="fa-solid fa-user"></i></a>
-                        <a href="{% url 'userlogout' %}" class="nav-link me-2"><i class="fa-solid fa-right-from-bracket"></i></a>
+                        <a href="{% url 'account' %}" class="nav-link me-2"><i class="fa-solid fa-user me-2"></i></a>
+                        <a href="{% url 'userlogout' %}" class="nav-link me-2"><i class="fa-solid fa-right-from-bracket me-2"></i></a>
+                        <a href="{% url 'wishlist' %}"><i class="fa-solid fa-heart me-2"></i></a>
+
                         <a href="{% url 'cart' %}" class="nav-link">
-                            <img src="{% static 'images/cart.png' %}" alt="Cart" width="30" height="24">
+                            <img src="{% static 'images/cart.png' %}" alt="Cart" width="30" height="24" class="me-2">
                         </a>
                     </div>
                 </div>
@@ -619,8 +621,7 @@ footer {
         
         <nav class="second-navbar">
             <ul class="second-nav-links" style="font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 500;">
-                <li><a href="{% url 'product_buy' %}">PRODUCTS</a></li> 
-                <li><a href="{% url 'wheretobuy' %}">WHERE TO BUY</a></li>
+             
                 <li>  <div class="container">
                     <a href="{% url 'signup' %}" class="newsletter-link">SIGN UP FOR OUR NEWSLETTER</a>
                 </div>

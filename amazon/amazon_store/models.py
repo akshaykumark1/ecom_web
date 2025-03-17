@@ -81,3 +81,17 @@ class User(models.Model):
     username = models.CharField(max_length=255)
     email = models.EmailField()
     password = models.CharField(max_length=255)    
+
+
+# wishlist
+class Wishlist(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('user', 'product')  # Prevent duplicate wishlist entries
+        
+    def __str__(self):
+        return f"{self.user.username}'s wishlist item: {self.product.title}"
+    

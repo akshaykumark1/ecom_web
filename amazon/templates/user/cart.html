@@ -1,159 +1,224 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shopping Cart</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .card {
-            border-radius: 1rem;
-            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
         }
-    
-        .list-group-item {
-            padding: 1rem;
-            border: none;
-            border-radius: 1rem;
+        
+        .quantity-control {
+            width: 120px;
         }
-    
-        .list-group-item:hover {
+        
+        .cart-summary {
             background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
         }
-    
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-        }
-    
-        .quantity-controls button {
-            padding: 0.5rem;
-            font-size: 1.25rem;
-            border-radius: 0.5rem;
-        }
-    
-        .quantity-controls button:first-child {
-            margin-right: 0.5rem;
-        }
-    
-        .quantity-controls button:last-child {
-            margin-left: 0.5rem;
-        }
-    
-        .quantity-controls button:hover {
-            background-color: #dee2e6;
-        }
-    
-        .quantity-controls span {
-            margin: 0 1rem;
-        }
-    
-        .btn-outline-secondary {
-            color: #6c757d;
-            border-color: #6c757d;
-        }
-    
-        .btn-outline-secondary:hover {
-            background-color: #6c757d;
-            color: #fff;
-        }
-    
-        .btn-danger {
-            color: #fff;
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-    
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-    
-        .btn-success {
-            color: #fff;
-            background-color: #28a745;
-            border-color: #28a745;
-        }
-    
-        .btn-success:hover {
-            background-color: #1e7e34;
-            border-color: #1c7430;
-        }
-    
-        .btn-outline-primary {
-            color: #007bff;
-            border-color: #007bff;
-        }
-    
-        .btn-outline-primary:hover {
-            background-color: #007bff;
-            color: #fff;
+        
+        @media (max-width: 767px) {
+            .cart-item {
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .cart-item-details {
+                padding-left: 10px;
+            }
+            
+            .quantity-control {
+                width: 100px;
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">MyShop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product_buy' %}">Products</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="{% url 'cart' %}" class="btn btn-outline-primary position-relative">
+                        <i class="fas fa-shopping-cart"></i> Cart
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                            {{ cart_items|length }}
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<form action=""></form>
-<div class="container mt-5">
-    <h2 class="mb-4 text-center">🛒 Your Shopping Cart</h2>
-
-    {% if cart_items %}
+    <!-- Cart Content -->
+    <div class="container my-5">
         <div class="row">
-            <div class="col-lg-8">
-                <div class="card shadow p-3">
-                    <ul class="list-group">
-                        {% for item in cart_items %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ item.image_url }}" alt="{{ item.name }}" class="img-fluid rounded" style="width: 80px; height: 80px; object-fit: contain; margin-right: 15px;">
-                                <div>
-                                    <h6 class="mb-1">{{ item.name }}</h6>
-                                    <p class="text-muted mb-0">Price: ₹{{ item.price }}</p>
-                                </div>
+            <div class="col-12">
+                <h1 class="mb-4">Your Shopping Cart</h1>
+            </div>
+        </div>
+
+        {% if cart_items %}
+        <div class="row">
+            <!-- Cart Items -->
+            <div class="col-md-8">
+                <!-- Desktop View -->
+                <div class="d-none d-md-block">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ item.product.image1.url }}" alt="{{ item.product.title }}" class="cart-item-image me-3">
+                                        <span>{{ item.product.title }}</span>
+                                    </div>
+                                </td>
+                                <td>${{ item.product.price }}</td>
+                                <td>
+                                    <form action="{% url 'update_cart' item.id %}" method="POST" class="d-flex quantity-control">
+                                        {% csrf_token %}
+                                        <button type="submit" name="action" value="decrease" class="btn btn-sm btn-outline-secondary">-</button>
+                                        <input type="text" value="{{ item.quantity }}" class="form-control form-control-sm text-center mx-2" readonly>
+                                        <button type="submit" name="action" value="increase" class="btn btn-sm btn-outline-secondary">+</button>
+                                    </form>
+                                </td>
+                                <td>${{ item.price }}</td>
+                                <td>
+                                    <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Mobile View -->
+                <div class="d-md-none">
+                    {% for item in cart_items %}
+                    <div class="cart-item">
+                        <div class="d-flex">
+                            <img src="{{ item.product.image1.url }}" alt="{{ item.product.title }}" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <h5>{{ item.product.title }}</h5>
+                                <p class="mb-1">${{ item.product.price }}</p>
+                                <p class="mb-1">Total: ${{ item.price }}</p>
                             </div>
-                            <div class="quantity-controls">
-                                <form action="#" method="POST" class="d-inline">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="name" value="{{ item.name }}">
-                                    <button type="submit" name="action" value="decrease" class="btn btn-sm btn-outline-secondary">−</button>
-                                    <span class="mx-2">{{ item.quantity }}</span>
-                                    <button type="submit" name="action" value="increase" class="btn btn-sm btn-outline-secondary">+</button>
-                                </form>
-                                <form action="#" method="POST" class="d-inline">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="name" value="{{ item.name }}">
-                                    <button type="submit" class="btn btn-danger btn-sm ms-2">🗑 Remove</button>
-                                </form>
-                            </div>
-                        </li>
-                        {% endfor %}
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <form action="{% url 'update_cart' item.id %}" method="POST" class="d-flex quantity-control">
+                                {% csrf_token %}
+                                <button type="submit" name="action" value="decrease" class="btn btn-sm btn-outline-secondary">-</button>
+                                <input type="text" value="{{ item.quantity }}" class="form-control form-control-sm text-center mx-2" readonly>
+                                <button type="submit" name="action" value="increase" class="btn btn-sm btn-outline-secondary">+</button>
+                            </form>
+                            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i> Remove
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-md-4">
+                <div class="cart-summary">
+                    <h4 class="mb-3">Order Summary</h4>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal ({{ cart_items|length }} items)</span>
+                        <span>${{ total_price }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping</span>
+                        <span>FREE</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong>Total</strong>
+                        <strong>${{ total_price }}</strong>
+                    </div>
+                    <a href="{% url 'checkout' %}" class="btn btn-success w-100">Proceed to Checkout</a>
+                    <a href="{% url 'home' %}" class="btn btn-outline-primary w-100 mt-2">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <p class="mb-0">Your cart is empty.</p>
+                </div>
+                <a href="{% url 'product_buy' %}" class="btn btn-primary mt-3"> Continue Shopping</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>MyShop</h5>
+                    <p>Quality products at affordable prices.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Products</a></li>
+                        <li><a href="#" class="text-white">About Us</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
                     </ul>
                 </div>
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i>123 Shop Street, City</p>
+                        <p class="mb-1"><i class="fas fa-phone me-2"></i>(123) 456-7890</p>
+                        <p class="mb-1"><i class="fas fa-envelope me-2"></i>info@myshop.com</p>
+                    </address>
+                </div>
             </div>
-
-            <!-- Summary Section -->
-            <div class="col-lg-4">
-                <div class="card shadow p-3">
-                    <h5 class="mb-3">Order Summary</h5>
-                    <p>Total Items: <strong>{{ cart_items|length }}</strong></p>
-                    <p>Total Price: <strong>₹{{ total_price }}</strong></p>
-                    <a href="#" class="btn btn-success btn-block">Proceed to Checkout</a>
-                    <a href="#" class="btn btn-outline-primary btn-block mt-2">Continue Shopping</a>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2025 MyShop. All rights reserved.</p>
                 </div>
             </div>
         </div>
-    {% else %}
-        <div class="text-center">
-            <h4 class="text-muted">🛒 Your cart is empty!</h4>
-            <a href="{% url 'home' %}" class="btn btn-primary mt-3">Start Shopping</a>
-        </div>
-    {% endif %}
-</div>
+    </footer>
 
-    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-

@@ -5,69 +5,68 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from .models import Product, Cart
+from django.views.decorators.http import require_POST
 
 def home(request):
     product=Product.objects.all()
-
     return render(request, 'base.html',{'product':product})
     
     
     
+def signup(request):
+    if request.POST:
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        confirmpassword = request.POST.get('confpassword')
+
+        
+        if not username or not email or not password or not confirmpassword:
+            messages.error(request, 'All fields are required.')
+        elif confirmpassword != password:
+            messages.error(request, "Passwords do not match.")
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists.")
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists.")
+        else:
+        
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.save()
+            messages.success(request, "Account created successfully!")
+            return redirect('signin')  
+
+    return render(request, "signin.html")
+
 def signin(request):
     if request.user.is_authenticated:
         return redirect('home')
-    username=None
-    password=None 
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         
-        if not username or not password:
-            messages.error(request, 'Please fill in all fields.')
-            return render(request, 'signin.html')
-        
-        user = authenticate(request, username=username, password=password)
-
+        user = authenticate(username=username, password=password)
         
         if user is not None:
             login(request, user)
-            request.session['username'] = user.username
-            request.session['user_id'] = user.id
-            if user.is_superuser:
-                return redirect('seller')
-            return redirect('home')
-        
+            request.session['username'] = username
+            if  user.is_superuser:
+                return redirect('admin')
+            else:
+                return redirect('home')
         else:
-            messages.error(request, 'Invalid username or password.')
+            messages.error(request, "Invalid credentials.")
+    
     return render(request, 'signin.html')
 
-def signup(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm-password')
-        if password != confirm_password:
-            messages.error(request, 'Passwords do not match.')
-        elif User.objects.filter(email=email).exists():
-            messages.error(request, 'Email already exists.')
-        elif User.objects.filter(username=username).exists():
-            messages.error(request, 'Username already exists.')
-        else:
-            user = User.objects.create_user(username=username, email=email, password=password)
-            user.is_seller = True
-            user.save()
-            messages.success(request, 'Account created successfully.')
-
-            return render(request,'signin.html')
-    return render(request, 'signup.html')
 
 
 
-def cart(request):
-    # product=Product.objects.get(id=pk)
-    # Handle cart logic here
-    return render(request, 'user/cart.html')
 
 def userlogout(request):
     logout(request)
@@ -110,159 +109,94 @@ def buy_now(request):
 
 
 
-def process_payment(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    # Add payment logic here (e.g., integrate with Stripe, PayPal, etc.)
-    return render(request, 'payment_success.html', {'product': product})
+#-------------------seller__-------------------------
+
+# def slogout(request):
+#     request.session.flush()
+#     return render(request, 'base.html')  # A custom template after logout
 
 
+# @login_required(login_url='sellerin')
+# def Add_product(request):
+#     return render(request, 'seller/selleradd.html')
 
 
+# def selleradd(request):
+#     if request.method == 'POST':
+#         title = request.POST.get('title')
+#         price = request.POST.get('price')
+#         category = request.POST.get('category')
+#         image = request.FILES.get('image')
+#         description = request.POST.get('description')
 
-def product_detail(request,pk):
-    product = get_object_or_404(Product, id=pk)
-    return render(request, 'user/product_detail.html', {'product': product})
+#         # Check if all required fields are provided
+#         if not title or not price or not category or not image or not description:
+#             messages.error(request, "All fields are required!")
+#             return render(request, 'seller/selleradd.html')
 
+#         # Create and save product object
+#         product = Product(
+#             title=title,
+#             price=price,
+#             category=category,
+#             image=image,
+#             description=description
+#         )
+#         product.save()
 
-
-@login_required(login_url='sellerin')
-def seller(request):
-    return render(request, 'seller/seller.html')    
-
-def sellerin(request):
-    if request.user.is_authenticated:
-        return redirect('seller')
-    username=None
-    password=None 
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        if not username or not password:
-            messages.error(request, 'Please fill in all fields.')
-            return render(request, 'seller/sellerin.html')
-        
-        user = authenticate(request, username=username, password=password)
-        
-        if user is not None:
-            login(request, user)
-            request.session['username'] = user.username
-            request.session['user_id'] = user.id
-            return redirect('seller')
-        else:
-            messages.error(request, 'Invalid username or password.')
+#         # Success message
+#         messages.success(request, "Product added successfully!")
+#         return redirect('sellerview')
     
-    return render(request, 'seller/sellerin.html')
+#     # If GET request, render the page with empty form
+#     return render(request, 'seller/selleradd.html')
 
 
-def registration(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm-password')
-        if password != confirm_password:
-            messages.error(request, 'Passwords do not match.')
-        elif User.objects.filter(email=email).exists():
-            messages.error(request, 'Email already exists.')
-        elif User.objects.filter(username=username).exists():
-            messages.error(request, 'Username already exists.')
-        else:
-            user = User.objects.create_user(username=username, email=email, password=password)
-            user.is_seller = True
-            user.save()
-            messages.success(request, 'Account created successfully.')
-
-            return render(request,'seller/sellerin.html')
-    return render(request, 'seller/registration.html')
+# def sellerview(request):
+#     products = Product.objects.all()
+#     return render(request, 'seller/seller.html', {'products': products})
 
 
-def slogout(request):
-    request.session.flush()
-    return render(request, 'base.html')  # A custom template after logout
+
+# def edit_product(request, id):
+#     product = Product.objects.get(id=id)
+#     if request.method == 'POST':
+#         title = request.POST.get('title')
+#         price = request.POST.get('price')
+#         category = request.POST.get('category')
+#         image = request.FILES.get('image')
+#         description = request.POST.get('description')
 
 
-@login_required(login_url='sellerin')
-def Add_product(request):
-    return render(request, 'seller/selleradd.html')
+#         # Check if all required fields are provided
+#         if not title or not price or not category or not description:
+#             messages.error(request, "All fields are required!")
+#             return render(request, 'seller/edit.html', {'product': product})
 
+#         # Update and save product object
+#         product.title = title
+#         product.price = price
+#         product.category = category
+#         if image:
+#             product.image = image
+#         product.description = description
+#         product.save()
 
-def selleradd(request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        price = request.POST.get('price')
-        category = request.POST.get('category')
-        image = request.FILES.get('image')
-        description = request.POST.get('description')
-
-        # Check if all required fields are provided
-        if not title or not price or not category or not image or not description:
-            messages.error(request, "All fields are required!")
-            return render(request, 'seller/selleradd.html')
-
-        # Create and save product object
-        product = Product(
-            title=title,
-            price=price,
-            category=category,
-            image=image,
-            description=description
-        )
-        product.save()
-
-        # Success message
-        messages.success(request, "Product added successfully!")
-        return redirect('sellerview')
+#         # Success message
+#         messages.success(request, "Product updated successfully!")
+#         return render(request, 'seller/seller.html')
     
-    # If GET request, render the page with empty form
-    return render(request, 'seller/selleradd.html')
+#     # If GET request, render the page with empty form
+#     return render(request, 'seller/edit.html', {'product': product})
 
+# def delete_view(request, id):
+#     product = Product.objects.filter(pk=id).first()  # Get product by ID (or None if not found)
+#     if product:
+#         product.delete()  # Delete the product
+#         messages.success(request, "Product deleted successfully!")  # Optional success message
+#     return redirect('sellerview')
 
-def sellerview(request):
-    products = Product.objects.all()
-    return render(request, 'seller/seller.html', {'products': products})
-
-
-
-def edit_product(request, id):
-    product = Product.objects.get(id=id)
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        price = request.POST.get('price')
-        category = request.POST.get('category')
-        image = request.FILES.get('image')
-        description = request.POST.get('description')
-
-
-        # Check if all required fields are provided
-        if not title or not price or not category or not description:
-            messages.error(request, "All fields are required!")
-            return render(request, 'seller/edit.html', {'product': product})
-
-        # Update and save product object
-        product.title = title
-        product.price = price
-        product.category = category
-        if image:
-            product.image = image
-        product.description = description
-        product.save()
-
-        # Success message
-        messages.success(request, "Product updated successfully!")
-        return render(request, 'seller/seller.html')
-    
-    # If GET request, render the page with empty form
-    return render(request, 'seller/edit.html', {'product': product})
-
-def delete_view(request, id):
-    product = Product.objects.filter(pk=id).first()  # Get product by ID (or None if not found)
-    if product:
-        product.delete()  # Delete the product
-        messages.success(request, "Product deleted successfully!")  # Optional success message
-    return redirect('sellerview')
-
-
+# #------------------------------------------------------------------------------#
 
 # def search(request):
 #     if request.method == 'POST':
@@ -286,12 +220,126 @@ def delete_view(request, id):
 #     return render(request, 'user/search.html', {'searched': '', 'category': '', 'results': []})
 
 
+def product_display(request):
+    products = Product.objects.all()
+    
+    return render(request, 'user/product_buy.html', {'products': products})
+#_---------------------------cart____________-------------------------------#
 
-def delete_all(request):
-    cart.objects.filter(user=request.user).delete()
-    request.session['cart_cleared'] = True
-    return redirect(cart)
+# Add to cart functionality
+@login_required
+def add_to_cart(request, product_id):  # Changed from id to product_id
+    if request.user.is_authenticated:
+        try:
+            product = Product.objects.get(id=product_id)  # Changed from id to product_id
+        except Product.DoesNotExist:
+            return redirect('product_not_found')  
+    
+        cart_item, created = Cart.objects.get_or_create(
+            user=request.user,
+            product=product,
+            defaults={'quantity': 1, 'totalprice': product.price}
+        )
+        
+        if not created:
+            cart_item.quantity += 1
+            cart_item.totalprice = cart_item.quantity * cart_item.product.price
+            cart_item.save()
+        
+        return redirect('cart')
+    else:
+        return redirect('signin')
 
+# View cart (standalone template)
+@login_required
+def Cart_view(request):
+    cart_items = Cart.objects.filter(user=request.user)
+    total_price = sum(item.product.price * item.quantity for item in cart_items)
+    cart_item_count = cart_items.count()
+    return render(request, 'user/cart.html', {'cart_items': cart_items, 'total_price': total_price, 'cart_item_count': cart_item_count})
+
+
+
+@require_POST
+def update_cart(request, cart_item_id):
+    cart_item = get_object_or_404(Cart, id=cart_item_id, user=request.user)
+    action = request.POST.get('action')
+    
+    if action == 'increase':
+        cart_item.quantity += 1
+    elif action == 'decrease':
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+        else:
+            cart_item.delete()
+            return redirect('cart')
+    
+    cart_item.calculate_price()
+    cart_item.save()
+    return redirect('cart')
+
+# Remove from cart
+@login_required
+def remove_from_cart(request, cart_item_id):
+    cart_item = get_object_or_404(Cart, id=cart_item_id, user=request.user)
+    cart_item.delete()
+    return redirect('cart')
+
+
+
+# For implementing Add to Cart button in product detail page
+def product_detail(request, pk):
+    product = get_object_or_404(Product, id=pk)  # Changed from filter() to get_object_or_404()
+    cart_product_ids = []
+    
+    if request.user.is_authenticated:
+        cart_product_ids = list(Cart.objects.filter(user=request.user).values_list('product_id', flat=True))
+        cart_item_count = Cart.objects.filter(user=request.user).count()
+    else:
+        cart_item_count = 0 
+    
+    context = {
+        'product': product,
+        'cart_item_count': cart_item_count,
+        'cart_product_ids': cart_product_ids
+    }
+    return render(request, 'user/product_detail.html', context)
+
+#----------------------------wishlist------------------------------------------------------#
+
+def wishlist(request):
+    return render(request, 'user/wishlist.html') 
+def addtowishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    
+    # Check if product is already in wishlist
+    wishlist_item, created = Wishlist.objects.get_or_create(
+        user=request.user,
+        product=product
+    )
+    
+    # For AJAX requests
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({
+            'success': True,
+            'message': f'{product.title} added to your wishlist'
+        })
+    
+    return redirect('product_buy')
+
+@login_required
+def remove_from_wishlist(request, product_id):
+    Wishlist.objects.filter(user=request.user, product_id=product_id).delete()
+    return redirect('wishlist')
+
+@login_required
+def view_wishlist(request):
+    wishlist_items = Wishlist.objects.filter(user=request.user).select_related('product')
+    
+    context = {
+        'wishlist_items': wishlist_items
+    }
+    return render(request, 'user/wishlist.html', context)   
 
 
 
@@ -303,9 +351,3 @@ def address(request):
 
 def security(request):
     return render(request,'accounts/security.html')
-
-def product_display(request):
-    products = Product.objects.all()
-    
-    return render(request, 'user/product_buy.html', {'products': products})
-

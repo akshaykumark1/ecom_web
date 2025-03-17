@@ -21,8 +21,9 @@
                     {% for i in products %}
                         <!-- Product Card -->
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                            <div class="card product-card">
-                               <a href="{% url 'product_detail' i.id %}"><img src="{{ i.image1.url }}" class="card-img-top product-image" alt="Amino Build"></a>
+                            <div class="card product-card position-relative">
+                                <a href="{% url 'product_detail' i.id %}"><img src="{{ i.image1.url }}" class="card-img-top product-image" alt="Amino Build"></a>
+                               <a href="{% url 'addtowishlist' i.id %}"> <button class="btn btn-sm btn-outline-secondary position-absolute top-0 end-0 m-2"><i class="fa-solid fa-heart" style="color: #d81313;"></i></i></button></a>
                                 <div class="card-body">
                                     <h5 class="card-title">{{ i.title }}</h5>
                                     <p class="category-tag">{{ i.category }}</p>
@@ -35,3 +36,4 @@
             </div>
         </div>
     </div>
+
