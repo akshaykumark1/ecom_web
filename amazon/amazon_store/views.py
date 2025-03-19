@@ -1,47 +1,18 @@
 # myapp/views.py
 from django.shortcuts import render, redirect,get_object_or_404
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import *
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import Product, Cart
 from django.views.decorators.http import require_POST
+from django.contrib.auth.models import User
+
+
 
 def home(request):
     product=Product.objects.all()
     return render(request, 'base.html',{'product':product})
-    
-    
-    
-def signup(request):
-    if request.POST:
-        email = request.POST.get('email')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        confirmpassword = request.POST.get('confpassword')
-
-        
-        if not username or not email or not password or not confirmpassword:
-            messages.error(request, 'All fields are required.')
-        elif confirmpassword != password:
-            messages.error(request, "Passwords do not match.")
-        elif User.objects.filter(email=email).exists():
-            messages.error(request, "Email already exists.")
-        elif User.objects.filter(username=username).exists():
-            messages.error(request, "Username already exists.")
-        else:
-        
-            user = User.objects.create_user(username=username, email=email, password=password)
-            user.save()
-            messages.success(request, "Account created successfully!")
-            return redirect('signin')  
-
-    return render(request, "signin.html")
-
 def signin(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -63,21 +34,38 @@ def signin(request):
             messages.error(request, "Invalid credentials.")
     
     return render(request, 'signin.html')
+def signup(request):
+    if request.method == 'POST':  
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        confirmpassword = request.POST.get('confirmpassword')
 
+        if not username or not email or not password or not confirmpassword:
+            messages.error(request, 'All fields are required.')
+        elif confirmpassword != password:
+            messages.error(request, "Passwords do not match.")
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists.")
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists.")
+        else:
+            # Corrected line to use create_user
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.save()
+            messages.success(request, "Account created successfully!")
+            return redirect('signin')  
 
+    return render(request, "signup.html")
 
 
 
 def userlogout(request):
     logout(request)
-    return redirect('signin')  # A custom template after logout
+    return render(request,'signin.html')
 
-
-
-
-
-
-
+def admin(request):
+    return render(request, 'seller/seller.html')
 
 
 
@@ -198,27 +186,29 @@ def buy_now(request):
 
 # #------------------------------------------------------------------------------#
 
-# def search(request):
-#     if request.method == 'POST':
-#         searched = request.POST.get('searched', '').strip()  # Get the search term
-#         category = request.POST.get('category', '')  # Get the selected category (if any)
-        
-#         # Filter products based on the search term and category
-#         results = Product.objects.all()
-        
-#         if searched:
-#             results = results.filter(name__icontains=searched)
-        
-#         if category:
-#             # Dynamically filter based on the category field
-#             category_filter = {f"{category}": True}
-#             results = results.filter(**category_filter)
 
-#         return render(request, 'user/search.html', {'searched': searched, 'category': category, 'results': results})
+
+
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched', '').strip()  # Get the search term
+        category = request.POST.get('category', '')  # Get the selected category (if any)
+        
+        # Filter products based on the search term and category
+        results = Products.objects.all()
+        
+        if searched:
+            results = results.filter(name__icontains=searched)
+        
+        if category:
+            # Dynamically filter based on the category field
+            category_filter = {f"{category}": True}
+            results = results.filter(**category_filter)
+
+        return render(request, 'user/search.html', {'searched': searched, 'category': category, 'results': results})
     
-#     # Render the empty search page for GET requests
-#     return render(request, 'user/search.html', {'searched': '', 'category': '', 'results': []})
-
+    # Render the empty search page for GET requests
+    return render(request, 'user/search.html', {'searched': '', 'category': '', 'results': []})
 
 def product_display(request):
     products = Product.objects.all()
@@ -228,22 +218,22 @@ def product_display(request):
 
 # Add to cart functionality
 @login_required
-def add_to_cart(request, product_id):  # Changed from id to product_id
+def add_to_cart(request, product_id):
     if request.user.is_authenticated:
         try:
-            product = Product.objects.get(id=product_id)  # Changed from id to product_id
+            product = Product.objects.get(id=product_id)
         except Product.DoesNotExist:
             return redirect('product_not_found')  
-    
+
         cart_item, created = Cart.objects.get_or_create(
             user=request.user,
             product=product,
-            defaults={'quantity': 1, 'totalprice': product.price}
+            defaults={'quantity': 1, 'price': product.price}  # ✅ Fixed: 'price' instead of 'totalprice'
         )
         
         if not created:
             cart_item.quantity += 1
-            cart_item.totalprice = cart_item.quantity * cart_item.product.price
+            cart_item.price = cart_item.quantity * cart_item.product.price
             cart_item.save()
         
         return redirect('cart')

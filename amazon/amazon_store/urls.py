@@ -15,7 +15,7 @@ urlpatterns = [
     path('cart',views.Cart_view, name='cart'),
 
 
-    # path('sellerhome',views.seller,name='seller'),
+    path('adm',views.admin,name='admin'),
 
     # path('logout',views.slogout, name='logout'),
     # path('add_product',views.Add_product,name='add_product'),

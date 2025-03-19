@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import datetime
+from django.contrib.auth.models import User
 # from datetime import datetime, timedelta
 
 # Category Model
@@ -44,7 +45,7 @@ class Product(models.Model):
 class Cart(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     
     def calculate_price(self):
@@ -58,8 +59,7 @@ class Cart(models.Model):
 class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    # Add a User ForeignKey if you need to link orders to users
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Order of {self.product.title} (x{self.quantity})"
@@ -68,7 +68,7 @@ class Order(models.Model):
 
 # adress model
 class Address(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
@@ -76,11 +76,6 @@ class Address(models.Model):
     country = models.CharField(max_length=255)
 
 
-# user
-class User(models.Model):
-    username = models.CharField(max_length=255)
-    email = models.EmailField()
-    password = models.CharField(max_length=255)    
 
 
 # wishlist
