@@ -15,17 +15,9 @@ urlpatterns = [
     path('cart',views.Cart_view, name='cart'),
 
 
-    path('adm',views.admin,name='admin'),
+    path('admin',views.admin,name='admin'),
 
-    # path('logout',views.slogout, name='logout'),
-    # path('add_product',views.Add_product,name='add_product'),
-    # path('selleradd',views.selleradd,name='selleradd'),
-    # path('sellerview',views.sellerview,name='sellerview'),
-    # path('edit_product/<int:id>/',views.edit_product, name='edit_product'),  
-    # path('delete_view/<int:id>/',views.delete_view, name='delete_view'),   
- 
 
- 
 
 
 

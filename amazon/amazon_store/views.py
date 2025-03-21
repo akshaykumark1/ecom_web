@@ -61,11 +61,12 @@ def signup(request):
 
 
 def userlogout(request):
-    logout(request)
-    return render(request,'signin.html')
+    request.session.flush()
+    return render(request, 'base.html')
+
 
 def admin(request):
-    return render(request, 'seller/seller.html')
+    return render(request, 'admin.html')
 
 
 
@@ -214,7 +215,7 @@ def product_display(request):
     products = Product.objects.all()
     
     return render(request, 'user/product_buy.html', {'products': products})
-#_---------------------------cart____________-------------------------------#
+#_---------------------------cart-------------------------------#
 
 # Add to cart functionality
 @login_required
